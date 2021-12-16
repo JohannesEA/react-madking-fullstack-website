@@ -5,7 +5,7 @@ const cors = require("cors");
 const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
-const path = require('path');
+// const path = require('path');
 
 
 
@@ -35,11 +35,11 @@ app.use("/api/products", productRoute);
 
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.join(__dirname, "./client/build")));
+// app.use(express.static(path.join(__dirname, "./client/build")));
 
-// app.get("/", (req, res) => {
-//     res.send("Server is running..")
-// })
+app.get("/", (req, res) => {
+    res.send("Server is running..")
+})
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, './client/build'));
