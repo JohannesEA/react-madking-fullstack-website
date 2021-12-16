@@ -37,9 +37,9 @@ app.use("/api/products", productRoute);
 // Have Node serve the files for our built React app
 app.use(express.static(path.join(__dirname, "./client/build")));
 
-app.get("/", (req, res) => {
-    res.send("Server is running..")
-})
+// app.get("/", (req, res) => {
+//     res.send("Server is running..")
+// })
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, './client/build'));
