@@ -103,7 +103,7 @@ const EditProduct = () => {
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const res = await publicRequest.get("/products");
+                const res = await publicRequest.get("api/products");
                 setProducts(res.data);
             } catch (err) {
                 console.log(err);

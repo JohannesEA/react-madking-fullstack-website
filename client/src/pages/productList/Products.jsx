@@ -22,7 +22,7 @@ const Products = ({ item }) => {
 
   let path = "";
   const handleClick = (item) => {
-    path = "/products/" + item._id;
+    path = "api/products/" + item._id;
     navigate(path);
   };
 

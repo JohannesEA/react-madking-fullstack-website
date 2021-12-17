@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://react-madking-shop.herokuapp.com/api";
+const BASE_URL = "https://react-madking-shop.herokuapp.com/";
 
 
 

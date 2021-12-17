@@ -27,7 +27,7 @@ const MusicCarouselle = () => {
   const hoverColor = "#767676";
 
   const handleClick = (item) => {
-    path = "/products/" + item._id;
+    path = "api/products/" + item._id;
     navigate(path);
   };
 
