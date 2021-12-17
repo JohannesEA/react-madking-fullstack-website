@@ -17,8 +17,7 @@ dotenv.config();
 
 mongoose
     .connect(
-        process.env.MONGO_URL
-    )
+        "mongodb+srv://admin:admin123@cluster0.04tn4.mongodb.net/Madking_Shop?retryWrites=true&w=majority")
     .then(() => console.log("db connection successfull"))
     .catch((err) => console.log(err));
 
