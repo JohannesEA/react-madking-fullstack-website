@@ -3,6 +3,8 @@ const User = require("../models/user");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
+const passSecretKey = "mdkmsk!!mwkdm78"
+
 //Register
 router.post("/register", async (req, res) => {
     const newUser = new User({
@@ -10,7 +12,7 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         password: CryptoJS.AES.encrypt(
             req.body.password,
-            process.env.PASS_SECRET_KEY
+            passSecretKey
         ).toString(),
     });
 
@@ -30,8 +32,7 @@ router.post("/login", async (req, res) => {
 
         const hashedPassword = CryptoJS.AES.decrypt(
             user.password,
-            process.env.PASS_SECRET_KEY
-        );
+            passSecretKey);
 
         const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
 
