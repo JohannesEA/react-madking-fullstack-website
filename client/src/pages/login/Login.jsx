@@ -27,7 +27,7 @@ const Login = () => {
         <Button backgroundcolor="#3E768C" color="white" hover="#558ba0" onClick={handleLogin} disabled={isFetching}>
           Log Inn
         </Button>{" "}
-        {!error && <Error>Innlogging feilet..</Error>}
+        {error && <Error>Innlogging feilet..</Error>}
       </LoginContainer>
     </Container>
   );

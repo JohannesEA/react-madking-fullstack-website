@@ -19,6 +19,7 @@ import {
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
+        console.log(user);
         const res = await publicRequest.post("api/auth/login", user);
         dispatch(loginSuccess(res.data));
     } catch (err) {
