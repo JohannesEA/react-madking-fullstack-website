@@ -12,7 +12,7 @@ const Product = ({ item }) => {
   const { height, width } = useWindowDimensions();
   const location = useLocation();
   const [product, setProduct] = useState({});
-  const id = location.pathname.split("/")[2];
+  const id = location.pathname.split("/")[3];
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
