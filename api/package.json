@@ -8,9 +8,10 @@
     "npm": "8.1.2"
   },
   "scripts": {
-    "heroku-postbuild":  "npm run start",
+    "heroku-postbuild": "npm run start",
     "start": "npm install && node ./index.js",
-    "dev": "concurrently \"npm run start\" \" cd ./client && npm start\""
+    "dev": "concurrently \"npm run start\" \" cd ./client && npm start\"",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "keywords": [],
   "author": "",
