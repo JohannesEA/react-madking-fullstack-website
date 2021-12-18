@@ -6,9 +6,15 @@ import { getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 ///https://www.npmjs.com/package/react-responsive-carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
+// import useWindowDimensions from "../../reusableFunctions/Functions";
 
 const MusicCarouselle = () => {
   const dispatch = useDispatch();
@@ -16,7 +22,8 @@ const MusicCarouselle = () => {
   const navigate = useNavigate();
   let path = "";
   const playButtonColor = "white";
-  const hoverColor = "#767676";
+  // const hoverColor = "#767676";
+  // const { height, width } = useWindowDimensions();
 
   const handleClick = (item) => {
     path = "/products/" + item._id;
@@ -26,7 +33,6 @@ const MusicCarouselle = () => {
   const handlePlaySong = (item) => {
     console.log("Play song ", item.title);
   };
-
 
   useEffect(() => {
     getProducts(dispatch);
@@ -41,8 +47,9 @@ const MusicCarouselle = () => {
 
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={100}
+        naturalSlideHeight={125}
         totalSlides={size}
+        infinite={true}
       >
         <Slider>
           {items.map((prod, index) => (
@@ -71,11 +78,8 @@ const MusicCarouselle = () => {
               </ImageBoxContainer>
             </Slide>
           ))}
-
         </Slider>
       </CarouselProvider>
-
-
     </Container>
   );
 };
@@ -83,17 +87,18 @@ const MusicCarouselle = () => {
 export default MusicCarouselle;
 
 const Container = styled.div`
-  display: flex;
-  height: auto;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  max-height: 55em;
+  padding-top: 3em;
+  padding-bottom: 2em;
+  text-align: center;
   transition: all 0.5s ease;
   background-color: var(--color-2);
 
   @media (max-width: 800px) {
-    flex-direction: column;
-    padding: 1em 1em 2em 1em;
+    max-height: 45em;
+    min-height: 40em;
+
+
   }
 `;
 
@@ -102,23 +107,14 @@ const ImageBoxContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-
-`;
-
-const Title = styled.h1`
-  color: var(--color-text);
-  font-size: 2rem;
-  font-weight: 800;
 `;
 
 const Image = styled.img`
-    max-height: 35em;
-    max-width: 40em;
-   height: 35em;
-width: 40em;
-border-radius: 1em;
-
+  max-height: 35em;
+  max-width: 40em;
+  height: 35em;
+  width: 40em;
+  border-radius: 1em;
 
   @media (max-width: 800px) {
     max-height: 25em;
@@ -131,8 +127,11 @@ border-radius: 1em;
 `;
 
 const Text = styled.p`
+  color: white;
+`;
 
-color: white;
+const Title = styled.h1`
+  color: white;
 `;
 
 const Buttons = styled.div`

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-// import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
 
 
 const Hero = () => {
   // const { height, width } = useWindowDimensions();
+  // import useWindowDimensions from "../../reusableFunctions/Functions";
 
 
   return (
