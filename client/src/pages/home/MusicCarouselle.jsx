@@ -14,6 +14,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { red } from "color-name";
 // import useWindowDimensions from "../../reusableFunctions/Functions";
 
 const MusicCarouselle = () => {
@@ -38,8 +39,9 @@ const MusicCarouselle = () => {
     getProducts(dispatch);
   }, [dispatch]);
 
-  const size = 7;
+  const size = products.length;
   const items = products.slice(0, size);
+
 
   return (
     <Container id="beats">
@@ -76,11 +78,23 @@ const MusicCarouselle = () => {
                   />
                 </Buttons>
               </ImageBoxContainer>
+              <ButtonBack style={{
+                color: "black", zIndex: 1, padding: "14px 18px", transition: "all 0.2s ease", fontWeight: "600", margin: "1em .5em",
+                cursor: "pointer",
+                border: "none",
+                borderRadius: "1.5em "
+              }}>Back</ButtonBack>
+              <ButtonNext style={{
+                color: "black", zIndex: 1, padding: "14px 18px", margin: "1em .5em", transition: "all 0.2s ease", fontWeight: "600",
+                cursor: "pointer",
+                border: "none",
+                borderRadius: "1.5em "
+              }}>Next</ButtonNext>
             </Slide>
           ))}
         </Slider>
       </CarouselProvider>
-    </Container>
+    </Container >
   );
 };
 
