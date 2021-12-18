@@ -3,9 +3,7 @@ import Footer from "../../components/footer/Footer";
 import ProductNavbar from "../../components/navbar/ProductNavbar";
 import Products from "./Products";
 
-
 const ProductListPage = () => {
-
     return (
         <Container>
             <ProductNavbar />
@@ -16,7 +14,5 @@ const ProductListPage = () => {
 };
 
 export default ProductListPage;
-
-
 
 const Container = styled.div``;

@@ -10,7 +10,7 @@ const firebaseConfig = {
     projectId: "madking-8fa32",
     storageBucket: "madking-8fa32.appspot.com",
     messagingSenderId: "695697012832",
-    appId: "1:695697012832:web:85bcbe7fa46c77ae8b2b05"
+    appId: "1:695697012832:web:85bcbe7fa46c77ae8b2b05",
 };
 
 // Initialize Firebase

@@ -3,10 +3,7 @@ import Footer from "../../components/footer/Footer";
 import ProductNavbar from "../../components/navbar/ProductNavbar";
 import Login from "./Login";
 
-
-
 const Loginpage = () => {
-
     return (
         <Container>
             <ProductNavbar />
@@ -18,8 +15,4 @@ const Loginpage = () => {
 
 export default Loginpage;
 
-
-const Container = styled.div`
-
-
-`;
+const Container = styled.div``;

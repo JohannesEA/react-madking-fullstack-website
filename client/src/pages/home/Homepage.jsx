@@ -15,7 +15,6 @@ import { AiOutlineArrowUp } from "react-icons/ai";
 // import Test from "./Test";
 import Fab from "@material-ui/core/Fab";
 
-
 const Container = styled.div``;
 
 const Homepage = () => {
@@ -29,13 +28,16 @@ const Homepage = () => {
         } else {
             setFab(false);
         }
-    }
+    };
     window.addEventListener("scroll", makeFABVisible);
 
     return (
         <Container>
-
-            <Fab className={showFab ? "fab-button active" : "fab-button"} color="primary" aria-label="add">
+            <Fab
+                className={showFab ? "fab-button active" : "fab-button"}
+                color="primary"
+                aria-label="add"
+            >
                 <Link
                     to="hero"
                     className={"fab-link"}
@@ -44,7 +46,13 @@ const Homepage = () => {
                     offset={-100}
                     duration={400}
                 >
-                    {showFab && <AiOutlineArrowUp className="fa-arrow-up" color="#214554" fontSize="3rem" />}
+                    {showFab && (
+                        <AiOutlineArrowUp
+                            className="fa-arrow-up"
+                            color="#214554"
+                            fontSize="3rem"
+                        />
+                    )}
                 </Link>
             </Fab>
 
@@ -61,5 +69,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-

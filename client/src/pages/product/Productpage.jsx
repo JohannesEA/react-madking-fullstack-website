@@ -6,7 +6,6 @@ import Product from "./Product";
 const Container = styled.div``;
 
 const Productpage = () => {
-
     return (
         <Container>
             <ProductNavbar />

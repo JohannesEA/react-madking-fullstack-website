@@ -1,5 +1,3 @@
-
-
 /*https://dev.to/holdmypotion/react-3d-image-slider-5g6*/
 
 import React, { useState } from "react";

@@ -3,9 +3,13 @@ import styled from "styled-components";
 // import { useDispatch } from "react-redux";
 // import { deleteProduct } from "../../../redux/apiCalls";
 import { publicRequest } from "../../../requestMethods";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import app from "../../../firebase"
-
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+} from "firebase/storage";
+import app from "../../../firebase";
 
 const EditProduct = () => {
     const [userInput, setUserInput] = useState({
@@ -18,7 +22,6 @@ const EditProduct = () => {
     // const dispatch = useDispatch();
     // const products = useSelector((state) => state.product.products);
     const [products, setProducts] = useState([]);
-
 
     //Get input values
     const handleChange = (e) => {
@@ -39,13 +42,11 @@ const EditProduct = () => {
             default:
                 setUserInput({ ...userInput, [name]: value });
         }
-
     };
-
 
     const handleUpdateProduct = (e) => {
         e.preventDefault();
-        console.log(userInput)
+        console.log(userInput);
         // addProduct(userInput, dispatch)
         const fileName = new Date().getTime() + userInput.img.name;
         const storage = getStorage(app);
@@ -72,7 +73,7 @@ const EditProduct = () => {
                 }
             },
             (error) => {
-                console.log(error)
+                console.log(error);
             },
             () => {
                 // Handle successful uploads on complete
@@ -91,14 +92,10 @@ const EditProduct = () => {
     //     deleteProduct(id, dispatch);
     // }
 
-
     // const handleEdit = (prod) => {
     //     console.log(prod);
 
     // }
-
-
-
 
     useEffect(() => {
         const getProducts = async () => {
@@ -108,93 +105,109 @@ const EditProduct = () => {
             } catch (err) {
                 console.log(err);
             }
-        }
+        };
         getProducts();
     }, [products]);
-
 
     return (
         <Container>
             <Title>Endre produkter. </Title>
 
             <Form encType="multipart/form-data">
-
                 <FormTitle>Endre produkt</FormTitle>
-                <Input type="text" name="title" placeholder="tittel.." onChange={(e) => handleChange(e)} />
-                <Input type="file" name="img" placeholder="bilde.." onChange={(e) => handleChange(e)} />
-                <Input type="text" name="description" placeholder="beskrivelse.." onChange={(e) => handleChange(e)} />
-                <Input type="text" name="categories" placeholder="kategori.." onChange={(e) => handleChange(e)} />
-                <Input type="text" name="price" placeholder="pris.." onChange={(e) => handleChange(e)} />
-
-
-                <Button backgroundcolor="#3E768C" color="white" hover="#558ba0" onClick={(e) => handleUpdateProduct(e)}>
+                <Input
+                    type="text"
+                    name="title"
+                    placeholder="tittel.."
+                    onChange={(e) => handleChange(e)}
+                />
+                <Input
+                    type="file"
+                    name="img"
+                    placeholder="bilde.."
+                    onChange={(e) => handleChange(e)}
+                />
+                <Input
+                    type="text"
+                    name="description"
+                    placeholder="beskrivelse.."
+                    onChange={(e) => handleChange(e)}
+                />
+                <Input
+                    type="text"
+                    name="categories"
+                    placeholder="kategori.."
+                    onChange={(e) => handleChange(e)}
+                />
+                <Input
+                    type="text"
+                    name="price"
+                    placeholder="pris.."
+                    onChange={(e) => handleChange(e)}
+                />
+                <Button
+                    backgroundcolor="#3E768C"
+                    color="white"
+                    hover="#558ba0"
+                    onClick={(e) => handleUpdateProduct(e)}
+                >
                     Oppdater
-                </Button>            </Form>
-
-
-
-
-
+                </Button>{" "}
+            </Form>
         </Container>
-    )
-}
+    );
+};
 
-export default EditProduct
-
-
-
-
+export default EditProduct;
 
 const Container = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-padding-top: 5em;
-flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5em;
+    flex-direction: column;
 `;
 
 const Title = styled.h1`
-font-size: 2rem;
-color: black;
+    font-size: 2rem;
+    color: black;
 `;
 
 const Form = styled.form`
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-box-shadow: 0px 0px 15px 5px #000000;
-width: 80%;
-padding: 1em;
-border-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 15px 5px #000000;
+    width: 80%;
+    padding: 1em;
+    border-radius: 1em;
 `;
 const FormTitle = styled.h1`
-font-size: 1.5rem;
-color: black;
+    font-size: 1.5rem;
+    color: black;
 `;
 const Input = styled.input`
-flex: 1;
-width: 90%;
-padding: 1.5em;
-margin: .5em 0 .5em 0;
+    flex: 1;
+    width: 90%;
+    padding: 1.5em;
+    margin: 0.5em 0 0.5em 0;
 `;
-
 
 const Button = styled.button`
-  padding: 14px 18px;
-  transition: all 0.2s ease;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  border-radius: 1.5em;
-  margin: 0 5px;
-  background-color: ${(props) => props.backgroundcolor};
-  color: ${(props) => props.color};
+    padding: 14px 18px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 1.5em;
+    margin: 0 5px;
+    background-color: ${(props) => props.backgroundcolor};
+    color: ${(props) => props.color};
 
-  &:hover {
-    background-color: ${(props) => props.hover};
-    border-radius: 0.5em;
-    box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-  }
+    &:hover {
+        background-color: ${(props) => props.hover};
+        border-radius: 0.5em;
+        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
+    }
 `;
-

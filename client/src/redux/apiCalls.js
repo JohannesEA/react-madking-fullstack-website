@@ -15,7 +15,6 @@ import {
     addProductSuccess,
 } from "./productRedux";
 
-
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
     try {
@@ -24,7 +23,7 @@ export const login = async (dispatch, user) => {
         dispatch(loginSuccess(res.data));
     } catch (err) {
         dispatch(loginFailure());
-        console.log("Login Failed!", err)
+        console.log("Login Failed!", err);
     }
 };
 export const getProducts = async (dispatch) => {
