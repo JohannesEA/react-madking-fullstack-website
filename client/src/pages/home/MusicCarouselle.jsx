@@ -83,13 +83,13 @@ const MusicCarouselle = () => {
                 cursor: "pointer",
                 border: "none",
                 borderRadius: "1.5em "
-              }}>Back</ButtonBack>
+              }}>Forrige</ButtonBack>
               <ButtonNext style={{
                 color: "black", zIndex: 1, padding: "14px 18px", margin: "1em .5em", transition: "all 0.2s ease", fontWeight: "600",
                 cursor: "pointer",
                 border: "none",
                 borderRadius: "1.5em "
-              }}>Next</ButtonNext>
+              }}>Neste</ButtonNext>
             </Slide>
           ))}
         </Slider>
