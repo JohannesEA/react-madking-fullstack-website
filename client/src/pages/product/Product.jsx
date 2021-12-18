@@ -48,9 +48,6 @@ const Product = ({ item }) => {
     <Container>
       {width > 800 && (
         <ProductContainer>
-          <ProductTitle color="white">
-            {product.title}
-          </ProductTitle>
           <ProductImage src={product.img} alt="test" />
         </ProductContainer>
       )}
@@ -82,8 +79,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  padding: 3em 1em 1em 1em;
-  height: 100vh;
+  padding: 6em 1em 1em 1em;
+  height: auto;
   @media (max-width: 800px) {
     flex-direction: column;
     padding-top: 7em;
@@ -97,9 +94,7 @@ const ProductContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2em;
-  background-color: var(--color-2);
-  max-width: 50%;
-  max-height: 80%;
+
 `;
 
 const ProductTitle = styled.h1`
