@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import { BsPlayBtn } from "react-icons/bs";
 import { useEffect } from "react";
-// import useWindowDimensions from "../../reusableFunctions/Functions";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 
 const MusicCarouselle = () => {
   const dispatch = useDispatch();
-  // const { height, width } = useWindowDimensions();
-  // const [slideItem, setSlideItem] = useState({ id: 1, item: {} });
   const products = useSelector((state) => state.product.products);
   const navigate = useNavigate();
   let path = "";
@@ -27,21 +26,6 @@ const MusicCarouselle = () => {
     console.log("Play song ", item.title);
   };
 
-  // const handleRightClick = () => {
-  //   if (slideItem.id === 5) {
-  //     setSlideItem({ id: 1 });
-  //   } else if (slideItem.id < 5) {
-  //     setSlideItem({ id: slideItem.id + 1 });
-  //   }
-  // };
-
-  // const handleLeftClick = () => {
-  //   if (slideItem.id === 1) {
-  //     setSlideItem({ id: 5 });
-  //   } else if (slideItem.id > 1) {
-  //     setSlideItem({ id: slideItem.id - 1 });
-  //   }
-  // };
 
   useEffect(() => {
     getProducts(dispatch);
@@ -54,65 +38,43 @@ const MusicCarouselle = () => {
     <Container id="beats">
       <Title>Våre Beats</Title>
 
-      <Carousel>
-        {items.map((prod) => (
-          <ImageBoxContainer key={prod._id}>
-            <Image src={prod.img} />
-            <Text>halla</Text>
-            <Buttons>
-              <Button
-                backgroundcolor="#3E768C"
-                color="white"
-                hover="#558ba0"
-                onClick={() => handleClick(prod)}
-              >
-                Velg
-              </Button>
-              <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
-                onClick={() => {
-                  handlePlaySong(prod);
-                }}
-              />
-            </Buttons>
-          </ImageBoxContainer>
-        ))}
-      </Carousel>
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={50}
+        totalSlides={size}
+      >
+        <Slider>
+          {items.map((prod, index) => (
+            <Slide key={prod._id}>
+              <ImageBoxContainer>
+                <Image src={prod.img} index={index} />
+                <Text>{prod.title}</Text>
+                <Buttons>
+                  <Button
+                    backgroundcolor="#3E768C"
+                    color="white"
+                    hover="#558ba0"
+                    onClick={() => handleClick(prod)}
+                  >
+                    Velg
+                  </Button>
+                  <BsPlayBtn
+                    color={playButtonColor}
+                    fontSize="3.4em"
+                    fontWeight="100"
+                    onClick={() => {
+                      handlePlaySong(prod);
+                    }}
+                  />
+                </Buttons>
+              </ImageBoxContainer>
+            </Slide>
+          ))}
 
-      {/* 
-      <ImageBoxContainer>
-        {items.map(prod => (
-          <ImageBox opacity="1" hoverColor={hoverColor} key={prod._id}>
-            <Image
-              padding="10em 8em"
-              img={prod.img}
-            ></Image>
-            <Buttons>
-              <Button
-                backgroundcolor="#3E768C"
-                color="white"
-                hover="#558ba0"
-                onClick={() =>
-                  handleClick(prod)
-                }
-              >
-                Velg
-              </Button>
-              <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
+        </Slider>
+      </CarouselProvider>
 
-                onClick={() => {
-                  handlePlaySong(prod)
-                }}
-              />
-            </Buttons>
-          </ImageBox>
-        ))}
-      </ImageBoxContainer> */}
+
     </Container>
   );
 };
@@ -122,7 +84,6 @@ export default MusicCarouselle;
 const Container = styled.div`
   display: flex;
   height: auto;
-  padding: 1em 1em 12em 1em;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -140,9 +101,7 @@ const ImageBoxContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2em;
-  max-height: 100%;
-  max-width: 100%;
+
 
 `;
 
@@ -153,8 +112,12 @@ const Title = styled.h1`
 `;
 
 const Image = styled.img`
-  height: 30em;
-  width: 20em;
+    max-height: 35em;
+    max-width: 40em;
+   height: 35em;
+width: 40em;
+border-radius: 1em;
+
 
   @media (max-width: 800px) {
     max-height: 25em;
