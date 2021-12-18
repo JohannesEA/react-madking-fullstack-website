@@ -82,13 +82,13 @@ const MusicCarouselle = () => {
                 color: "black", zIndex: 1, padding: "14px 18px", transition: "all 0.2s ease", fontWeight: "600", margin: "1em .5em",
                 cursor: "pointer",
                 border: "none",
-                borderRadius: "1.5em "
+                borderRadius: "1.5em ", backgroundColor: "white"
               }}>Forrige</ButtonBack>
               <ButtonNext style={{
                 color: "black", zIndex: 1, padding: "14px 18px", margin: "1em .5em", transition: "all 0.2s ease", fontWeight: "600",
                 cursor: "pointer",
                 border: "none",
-                borderRadius: "1.5em "
+                borderRadius: "1.5em ", backgroundColor: "white"
               }}>Neste</ButtonNext>
             </Slide>
           ))}
@@ -109,8 +109,8 @@ const Container = styled.div`
   background-color: var(--color-2);
 
   @media (max-width: 800px) {
-    max-height: 45em;
-    min-height: 40em;
+    max-height: 50em;
+    min-height: 45em;
 
 
   }
