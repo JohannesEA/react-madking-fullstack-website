@@ -24,12 +24,13 @@ const Order = () => {
   return (
     <Container>
       <OrderContainer>
-        <Title>Order</Title>
+        <Title>Handlekurv</Title>
 
         <OrderDetailsContainer>
           {cart.products.map((item, index) => (
             <OrderDetails key={index}>
-              <Image src={item.img} />
+              <Detail>              <Image src={item.img} />
+              </Detail>
               <Detail>
                 <DetailTitle>Tittel</DetailTitle>
                 <DetailInfo> {item.title}</DetailInfo>
@@ -52,7 +53,7 @@ const Order = () => {
           Sjekk Ut
         </Button>
           <Button backgroundcolor="red" color="white" hover="#ff7b7b" onClick={() => handleResetCart()}>
-            Reset
+            Tilbakestill
           </Button></Buttons>
 
 
@@ -70,6 +71,7 @@ const Container = styled.div`
   padding-bottom: 2em;
   align-items: center;
   justify-content: center;
+  min-height: 40em;
 `;
 
 const OrderDetailsContainer = styled.div`
@@ -95,10 +97,13 @@ const Title = styled.h1`
 
 const OrderDetails = styled.div`
   height: auto;
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction: row;
   margin: 0.5em auto;
+  box-shadow: 0.1rem 0.1rem 1rem .1rem rgba(26, 23, 23, 0.15);
+
 `;
 
 const Detail = styled.div`
@@ -110,7 +115,8 @@ const Detail = styled.div`
   font-size: 1.5rem;
   margin: 0 0.5em;
   color: black;
-  min-width: 12vh;
+  max-height: 10em;
+  max-width: 10em;
 
   @media (max-width: 800px) {
     min-width: 8vh;
@@ -124,20 +130,8 @@ const Detail = styled.div`
 `;
 
 const Image = styled.img`
-  height: 100%;
-  width: 100%;
-  max-height: 10em;
-  max-width: 10em;
-
-  @media (max-width: 800px) {
-    min-width: 8em;
-    min-height: 8em;
-  } ;
-
-  @media (max-width: 500px) {
-    max-width: 3em;
-    max-height: 3em;
-  } ;
+width:100%;
+height:100%;
 `;
 
 const DetailTitle = styled.h1`
@@ -163,8 +157,15 @@ font-size: 1.2rem;
 
 const DeleteArea = styled.div`
 display: flex;
+cursor: pointer;
 align-items: center;
 justify-content: center;
+
+
+&:hover {
+
+    box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
+  }
 `;
 
 const Buttons = styled.div`
