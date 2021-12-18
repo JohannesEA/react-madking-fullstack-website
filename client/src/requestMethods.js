@@ -7,7 +7,6 @@ const BASE_URL = "https://react-madking-shop.herokuapp.com/";
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
 const TOKEN = currentUser?.accessToken;
-console.log("Token: ", TOKEN);
 
 
 export const publicRequest = axios.create({

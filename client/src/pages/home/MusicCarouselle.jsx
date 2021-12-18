@@ -54,7 +54,6 @@ const MusicCarouselle = () => {
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
-  console.log(products)
 
   const size = 3;
   const items = products.slice(0, size)
