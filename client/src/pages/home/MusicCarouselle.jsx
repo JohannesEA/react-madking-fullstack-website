@@ -1,19 +1,12 @@
 import styled from "styled-components";
-// import {
-//   AiOutlineArrowRight,
-//   AiOutlineArrowLeft,
-//   AiOutlinePlayCircle,
-//   AiOutlinePlaySquare,
-// } from "react-icons/ai";
-import {
-  BsPlayBtn
-} from "react-icons/bs";
+import { BsPlayBtn } from "react-icons/bs";
 import { useEffect } from "react";
 // import useWindowDimensions from "../../reusableFunctions/Functions";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const MusicCarouselle = () => {
   const dispatch = useDispatch();
@@ -32,7 +25,7 @@ const MusicCarouselle = () => {
 
   const handlePlaySong = (item) => {
     console.log("Play song ", item.title);
-  }
+  };
 
   // const handleRightClick = () => {
   //   if (slideItem.id === 5) {
@@ -50,21 +43,45 @@ const MusicCarouselle = () => {
   //   }
   // };
 
-
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
 
-  const size = 3;
-  const items = products.slice(0, size)
-
+  const size = 7;
+  const items = products.slice(0, size);
 
   return (
     <Container id="beats">
       <Title>Våre Beats</Title>
 
+      <Carousel>
+        {items.map((prod) => (
+          <ImageBoxContainer key={prod._id}>
+            <Image src={prod.img} />
+            <Text>halla</Text>
+            <Buttons>
+              <Button
+                backgroundcolor="#3E768C"
+                color="white"
+                hover="#558ba0"
+                onClick={() => handleClick(prod)}
+              >
+                Velg
+              </Button>
+              <BsPlayBtn
+                color={playButtonColor}
+                fontSize="3.4em"
+                fontWeight="100"
+                onClick={() => {
+                  handlePlaySong(prod);
+                }}
+              />
+            </Buttons>
+          </ImageBoxContainer>
+        ))}
+      </Carousel>
 
-
+      {/* 
       <ImageBoxContainer>
         {items.map(prod => (
           <ImageBox opacity="1" hoverColor={hoverColor} key={prod._id}>
@@ -95,170 +112,6 @@ const MusicCarouselle = () => {
             </Buttons>
           </ImageBox>
         ))}
-      </ImageBoxContainer>
-
-      {/* <ImageBoxContainer>
-        {width > 800 && (
-          <AiOutlineArrowLeft
-            fontSize="8em"
-            color="white"
-            onClick={() => handleLeftClick()}
-          />
-        )}
-
-        {width > 800 && (
-          <ImageBox padding="1em 0" opacity=".8" hoverColor={hoverColor}>
-            {musicCarouselleDummyData[slideItem.id - 1].title}
-            <Image
-              padding="10em 8em"
-              img={musicCarouselleDummyData[slideItem.id - 1].img}
-              onClick={() => {
-                handleLeftClick();
-              }}
-            ></Image>
-            <Buttons>
-              <Button
-                backgroundcolor="#3E768C"
-                color="white"
-                hover="#558ba0"
-                onClick={() =>
-                  handleClick(musicCarouselleDummyData[slideItem.id - 1])
-                }
-              >
-                Velg
-              </Button>
-              <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
-
-                onClick={() => {
-                  handlePlaySong(musicCarouselleDummyData[slideItem.id - 1])
-                }}
-              />
-            </Buttons>
-          </ImageBox>
-        )}
-
-        {width < 800 && (
-          <ImageBox padding="1em 0" opacity="1" hoverColor={hoverColor}>
-            {musicCarouselleDummyData[slideItem.id].title}
-            <Image
-              padding="10em 8em"
-              img={musicCarouselleDummyData[slideItem.id].img}
-            ></Image>
-            <Buttons> <Button
-              backgroundcolor="#cbd4d8"
-              color="black"
-              hover="#b7d8e6"
-              onClick={() => {
-                handleClick(musicCarouselleDummyData[slideItem.id]);
-                console.log("link to ");
-              }}
-            >
-              Velg
-            </Button>
-              <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
-                onClick={() => {
-                  handlePlaySong(musicCarouselleDummyData[slideItem.id])
-                }}
-              /></Buttons>
-
-          </ImageBox>
-        )}
-
-        {width > 1200 && (
-          <ImageBox padding="1em 0" opacity="1" hoverColor={hoverColor}>
-            {musicCarouselleDummyData[slideItem.id].title}
-            <Image
-              padding="12em 10em"
-              img={musicCarouselleDummyData[slideItem.id].img}
-            >
-
-            </Image>
-            <Buttons>  <Button
-              backgroundcolor="#cbd4d8"
-              color="black"
-              hover="#b7d8e6"
-              onClick={() => {
-                handleClick(musicCarouselleDummyData[slideItem.id]);
-              }}
-            >
-              Velg
-            </Button>   <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
-                onClick={() => {
-                  handlePlaySong(musicCarouselleDummyData[slideItem.id])
-                }}
-              /></Buttons>
-
-
-          </ImageBox>
-        )}
-
-        {width > 800 && (
-          <ImageBox padding="1em 0" opacity=".8" hoverColor={hoverColor}>
-            {musicCarouselleDummyData[slideItem.id + 1].title}
-            <Image
-              padding="10em 8em"
-              img={musicCarouselleDummyData[slideItem.id + 1].img}
-              onClick={() => {
-                handleRightClick();
-              }}
-            >
-
-            </Image>
-            <Buttons>
-              <Button
-                backgroundcolor="#3E768C"
-                color="white"
-                hover="#558ba0"
-                onClick={() =>
-                  handleClick(musicCarouselleDummyData[slideItem.id + 1])
-                }
-              >
-                Velg
-              </Button>    <BsPlayBtn
-                color={playButtonColor}
-                fontSize="3.4em"
-                fontWeight="100"
-                onClick={() => {
-                  handlePlaySong(musicCarouselleDummyData[slideItem.id + 1])
-                }}
-              /></Buttons>
-
-          </ImageBox>
-        )}
-
-        {width > 800 && (
-          <AiOutlineArrowRight
-            fontSize="8em"
-            color="white"
-            onClick={() => handleRightClick()}
-          />
-        )}
-
-        <ArrowContainer>
-          {width < 800 && (
-            <AiOutlineArrowLeft
-              fontSize="3rem"
-              color="white"
-              onClick={() => handleLeftClick()}
-            />
-          )}
-          {width < 800 && (
-            <AiOutlineArrowRight
-              fontSize="3rem"
-              color="white"
-              onClick={() => handleRightClick()}
-            />
-          )}
-        </ArrowContainer>
       </ImageBoxContainer> */}
     </Container>
   );
@@ -284,13 +137,13 @@ const Container = styled.div`
 
 const ImageBoxContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  padding: 2em;
+  max-height: 100%;
+  max-width: 100%;
 
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
 `;
 
 const Title = styled.h1`
@@ -299,58 +152,23 @@ const Title = styled.h1`
   font-weight: 800;
 `;
 
-const ImageBox = styled.div`
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  opacity: ${(props) => props.opacity};
-  border-radius: 1em;
-  margin: 0 0.6em;
-  background-color: var(--color-1);
-  color: white;
-  width: 100%;
+const Image = styled.img`
+  height: 30em;
+  width: 20em;
 
-  @media (max-width: 1200px) {
-    opacity: 1;
-
+  @media (max-width: 800px) {
+    max-height: 25em;
+    max-width: 20em;
   }
-
-  &:hover {
-    box-shadow: 0px -8px 20px 1px ${(props) => props.hoverColor};
+  @media (max-width: 400px) {
+    max-height: 20em;
+    max-width: 15em;
   }
 `;
 
-const Image = styled.div`
-  flex: 1;
-  border-radius: 1em 1em 0em 0em;
+const Text = styled.p`
 
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  padding: ${(props) => props.padding};
-  background: url(${(props) => props.img}) no-repeat;
-  background-size: cover;
-  background-position: 100%;
-  width: 100%;
-
-  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.6, transparent), to(white));
-
-  &::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    content: "";
-    z-index: 1;
-    background: transparent;
-    -webkit-box-shadow: inset 0 0 1px #000000;
-  }
-
-  
+color: white;
 `;
 
 const Buttons = styled.div`
@@ -378,16 +196,3 @@ const Button = styled.button`
     box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
   }
 `;
-
-// const ArrowContainer = styled.div`
-//   z-index: 2;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   flex-direction: row;
-//   margin-top: 1em;
-
-//   @media (max-width: 800px) {
-//     margin-top: 3em;
-//   }
-// `;
