@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
+///https://www.npmjs.com/package/react-responsive-carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -40,7 +41,7 @@ const MusicCarouselle = () => {
 
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={50}
+        naturalSlideHeight={100}
         totalSlides={size}
       >
         <Slider>
