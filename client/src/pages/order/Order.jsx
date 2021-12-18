@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { removeProduct, resetCart } from "../../redux/cartRedux";

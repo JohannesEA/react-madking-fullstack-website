@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { deleteProduct } from "../../../redux/apiCalls";
+// import { useDispatch } from "react-redux";
+// import { deleteProduct } from "../../../redux/apiCalls";
 import { publicRequest } from "../../../requestMethods";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../../firebase"
@@ -15,7 +15,7 @@ const EditProduct = () => {
         categories: [],
         price: 0,
     });
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const products = useSelector((state) => state.product.products);
     const [products, setProducts] = useState([]);
 
@@ -86,16 +86,16 @@ const EditProduct = () => {
         );
     };
 
-    const handleDelete = (prod) => {
-        const id = prod._id;
-        deleteProduct(id, dispatch);
-    }
+    // const handleDelete = (prod) => {
+    //     const id = prod._id;
+    //     deleteProduct(id, dispatch);
+    // }
 
 
-    const handleEdit = (prod) => {
-        console.log(prod);
+    // const handleEdit = (prod) => {
+    //     console.log(prod);
 
-    }
+    // }
 
 
 

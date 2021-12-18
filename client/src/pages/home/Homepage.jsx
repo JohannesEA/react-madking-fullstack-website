@@ -11,8 +11,8 @@ import Contact from "./Contact";
 import { Link } from "react-scroll";
 import "./homepage.css";
 import { AiOutlineArrowUp } from "react-icons/ai";
-import useWindowDimensions from "../../reusableFunctions/Functions";
-import Test from "./Test";
+// import useWindowDimensions from "../../reusableFunctions/Functions";
+// import Test from "./Test";
 import Fab from "@material-ui/core/Fab";
 
 
@@ -21,7 +21,7 @@ const Container = styled.div``;
 const Homepage = () => {
     const [showFab, setFab] = useState(false);
 
-    const { height, width } = useWindowDimensions();
+    // const { height, width } = useWindowDimensions();
 
     const makeFABVisible = () => {
         if (window.scrollY >= 100) {

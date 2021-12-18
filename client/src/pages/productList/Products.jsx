@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { useEffect } from "react";
-// import { musicCarouselleDummyData } from "../../data/data";
-// import useWindowDimensions from "../../reusableFunctions/Functions";
 import { useNavigate } from "react-router-dom";
 import {
   BsPlayBtn
@@ -10,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
 
 const Products = ({ item }) => {
-  // const { height, width } = useWindowDimensions();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
@@ -22,7 +19,7 @@ const Products = ({ item }) => {
 
   let path = "";
   const handleClick = (item) => {
-    path = "api/products/" + item._id;
+    path = "/products/" + item._id;
     navigate(path);
   };
 
@@ -60,13 +57,8 @@ const Products = ({ item }) => {
 export default Products;
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding:5em 1em 1em 1em;
-  min-height: 80vh;
-  height: auto;
+text-align: center;
+
   @media (max-width: 800px) {
     flex-direction: column;
     padding-top: 7em;
@@ -76,43 +68,53 @@ const Container = styled.div`
 
 
 const ProductListContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  flex-wrap: wrap;
-  max-width: 95em;
+  display: grid;
+  grid-template-columns: auto auto auto ;
+  padding: 1em;
 
+  @media (max-width: 800px) {
+    grid-template-columns: auto auto ;
+
+  } ;
+
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+  } ;
 `;
 
 
 const ProductContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  flex: 1;
-  margin: 5px;
-  padding: 1em;
-  min-width: 20em;
-  max-width: 30em;
-  max-height: 40em;
+  
+  text-align: center;
+  margin: 1em 5px;
   border-radius: 1em;
-  height: auto;
   background-color: #00a27f4b;
-  position: relative;
-
-
-background-color: var(--color-1);
+  background-color: var(--color-1);
+  max-width: 20em;
+  max-height: 40em;
+  height: auto;
 
 &:hover {
     box-shadow: 0px -8px 20px 1px #767676;
   }
+
+  @media (max-width: 800px) {
+    padding-bottom: 2em;
+  } ;
 `;
 
 const SectionTitle = styled.h1`
-font-size: 3rem;
+font-size: 2rem;
 color: black;
-padding-top: 1em;
+padding-top: 4em;
+
+
+@media (max-width: 800px) {
+    padding-top: 1em;
+  } ;
 `;
 
 const Title = styled.h1`
@@ -123,7 +125,15 @@ color: white;
 
 const Image = styled.img`
 width: 100%;
-height: 70%;
+height: 60%;
+max-width: 20em;
+max-height: 35em;
+
+@media (max-width: 600px) {
+  max-width: 15em;
+max-height: 25em;
+
+  } ;
 `;
 
 const Price = styled.p`

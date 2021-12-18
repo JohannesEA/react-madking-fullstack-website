@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, getProducts, deleteProduct, updateProduct } from "../../../redux/apiCalls";
-import { publicRequest } from "../../../requestMethods";
+import { addProduct, getProducts, deleteProduct } from "../../../redux/apiCalls";
+// import { publicRequest } from "../../../requestMethods";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from "../../../firebase"
 

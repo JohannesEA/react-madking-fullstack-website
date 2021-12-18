@@ -27,10 +27,10 @@ flex-direction: column;
 `;
 
 
-const Item = styled.div`
-flex: ${props => props.flex};
-padding: 10em;
-background-color: ${props => props.bc};
-`;
+// const Item = styled.div`
+// flex: ${props => props.flex};
+// padding: 10em;
+// background-color: ${props => props.bc};
+// `;
 
 

@@ -9,7 +9,7 @@ import { getProducts } from "../../redux/apiCalls";
 
 
 const Product = ({ item }) => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const location = useLocation();
   const [product, setProduct] = useState({});
   const id = location.pathname.split("/")[2];
@@ -34,7 +34,7 @@ const Product = ({ item }) => {
       }
     };
     getProduct();
-  }, [id]);
+  }, [id, products]);
 
   const handleClick = () => {
     dispatch(

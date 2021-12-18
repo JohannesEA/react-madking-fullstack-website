@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import { musicCarouselleDummyData } from "../../data/data";
-import {
-  AiOutlineArrowRight,
-  AiOutlineArrowLeft,
-  AiOutlinePlayCircle,
-  AiOutlinePlaySquare,
-} from "react-icons/ai";
+// import {
+//   AiOutlineArrowRight,
+//   AiOutlineArrowLeft,
+//   AiOutlinePlayCircle,
+//   AiOutlinePlaySquare,
+// } from "react-icons/ai";
 import {
   BsPlayBtn
 } from "react-icons/bs";
-import { useState, useEffect } from "react";
-import useWindowDimensions from "../../reusableFunctions/Functions";
+import { useEffect } from "react";
+// import useWindowDimensions from "../../reusableFunctions/Functions";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const MusicCarouselle = () => {
   const dispatch = useDispatch();
-  const { height, width } = useWindowDimensions();
-  const [slideItem, setSlideItem] = useState({ id: 1, item: {} });
+  // const { height, width } = useWindowDimensions();
+  // const [slideItem, setSlideItem] = useState({ id: 1, item: {} });
   const products = useSelector((state) => state.product.products);
   const navigate = useNavigate();
   let path = "";
@@ -35,21 +34,21 @@ const MusicCarouselle = () => {
     console.log("Play song ", item.title);
   }
 
-  const handleRightClick = () => {
-    if (slideItem.id === 5) {
-      setSlideItem({ id: 1 });
-    } else if (slideItem.id < 5) {
-      setSlideItem({ id: slideItem.id + 1 });
-    }
-  };
+  // const handleRightClick = () => {
+  //   if (slideItem.id === 5) {
+  //     setSlideItem({ id: 1 });
+  //   } else if (slideItem.id < 5) {
+  //     setSlideItem({ id: slideItem.id + 1 });
+  //   }
+  // };
 
-  const handleLeftClick = () => {
-    if (slideItem.id === 1) {
-      setSlideItem({ id: 5 });
-    } else if (slideItem.id > 1) {
-      setSlideItem({ id: slideItem.id - 1 });
-    }
-  };
+  // const handleLeftClick = () => {
+  //   if (slideItem.id === 1) {
+  //     setSlideItem({ id: 5 });
+  //   } else if (slideItem.id > 1) {
+  //     setSlideItem({ id: slideItem.id - 1 });
+  //   }
+  // };
 
 
   useEffect(() => {
@@ -69,7 +68,7 @@ const MusicCarouselle = () => {
 
       <ImageBoxContainer>
         {items.map(prod => (
-          <ImageBox opacity="1" hoverColor={hoverColor}>
+          <ImageBox opacity="1" hoverColor={hoverColor} key={prod._id}>
             <Image
               padding="10em 8em"
               img={prod.img}
@@ -381,15 +380,15 @@ const Button = styled.button`
   }
 `;
 
-const ArrowContainer = styled.div`
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  margin-top: 1em;
+// const ArrowContainer = styled.div`
+//   z-index: 2;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   flex-direction: row;
+//   margin-top: 1em;
 
-  @media (max-width: 800px) {
-    margin-top: 3em;
-  }
-`;
+//   @media (max-width: 800px) {
+//     margin-top: 3em;
+//   }
+// `;

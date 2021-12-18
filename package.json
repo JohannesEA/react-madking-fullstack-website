@@ -141,7 +141,9 @@
     "npm": "8.1.2"
   },
   "scripts": {
-    "start": "cd ./api && npm run start"
+    "start": "cd ./api && npm run start",
+    "dev": "concurrently \"cd api && npm run start\" \"cd client && npm start\""
+
   },
   "repository": {
     "type": "git",

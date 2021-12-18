@@ -4,7 +4,7 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
 
 const About = () => {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return (
     <Container id="about">

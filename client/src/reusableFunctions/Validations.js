@@ -29,7 +29,6 @@ export const validatePhonenumber = (number, errorMessage) => {
     }
     else {
         errorMessage = "Telefonnummer er ikke gyldig.. må være 99494039 eller lignende";
-
         return false;
     }
 
