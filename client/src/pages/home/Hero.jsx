@@ -21,7 +21,7 @@ const Hero = () => {
     return (
         <Container id="hero">
             <Left>
-                {contents.map(title => (<Title>{title.herotitle}</Title>))}
+                {contents.map(title => (<Title key={title._id + "mdks22mk"}>{title.herotitle}</Title>))}
                 <ButtonContainer>
                     <Link
                         to="about"

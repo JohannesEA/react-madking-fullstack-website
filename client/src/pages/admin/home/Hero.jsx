@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import styled from "styled-components";
+import {updateContent, getContent} from "../../../redux/apiCalls"
+import { useDispatch, useSelector } from "react-redux";
 
 const Hero = () => {
+    const content = useSelector(state => state.content.contents);
+
+    const size = content.length;
+    const contents = content.slice(0, size);
+
     const [userInput, setUserInput] = useState({
-        title: "",
-        image: "",
+        herotitle: "",
+        heroimg: "",
+        abouttitle: contents[0].abouttitle,
+        aboutdesc: contents[0].aboutdesc,
+        aboutimg: contents[0].aboutimg,
+        workprocestitle: contents[0].workprocestitle,
+        workprocessone: contents[0].workprocessone,
+        workprocesstwo: contents[0].workprocesstwo,
+        workprocessthree:contents[0].workprocessthree,
+        workprocessfour: contents[0].workprocessfour,
+        beatstitle: contents[0].beatstitle
     });
+
+    const dispatch = useDispatch(); 
 
     //Get input values
     const handleChange = (e) => {
@@ -16,8 +34,16 @@ const Hero = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(userInput);
+        updateContent( contents[0]._id, userInput, dispatch);
+     
     };
+
+
+
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
 
     return (
         <Container>
@@ -29,13 +55,13 @@ const Hero = () => {
                 </FormTitle>
                 <Input
                     type="text"
-                    name="title"
+                    name="herotitle"
                     placeholder="overskrift.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="image"
+                    name="heroimg"
                     placeholder="bilde.."
                     onChange={(e) => handleChange(e)}
                 />

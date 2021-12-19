@@ -34,6 +34,7 @@ export const contentSlice = createSlice({
                     (item) => item._id === action.payload.id
                 )
             ] = action.payload.content;
+            console.log(action.payload.content);
         },
         updateContentFailure: (state) => {
             state.isFetching = false;

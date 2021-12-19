@@ -40,7 +40,7 @@ useEffect(() => {
     return (
         <Container id="process">
             <Top>
-            {contents.map(title => (<Title>{title.workprocestitle}</Title>))}
+            {contents.map(title => (<Title key={title._id + "mdksds112smk"} >{title.workprocestitle}</Title>))}
             </Top>
 
             <Center>

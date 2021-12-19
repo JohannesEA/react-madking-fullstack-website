@@ -55,7 +55,7 @@ const MusicCarouselle = () => {
 
     return (
         <Container id="beats">
-            {contents.map(title => (<Title>{title.beatstitle}</Title>))}
+            {contents.map(title => (<Title key={title._id + "mdkdcdasmk"}>{title.beatstitle}</Title>))}
 
             <SliderContainer>
                 <Slider {...settings}>

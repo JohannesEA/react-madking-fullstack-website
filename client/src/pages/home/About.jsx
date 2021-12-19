@@ -25,10 +25,10 @@ const About = () => {
     return (
         <Container id="about">
             <Left>
-            {contents.map(title => (<Title>{title.abouttitle}</Title>))}
+            {contents.map(title => (<Title key={title._id + "mdksmk"}>{title.abouttitle}</Title>))}
                 {width > 800 && (
                     <TextAndButtonContainer>
-                                    {contents.map(text => (<Text>{text.aboutdesc}</Text>))}
+                            {contents.map(text => (<Text key={text._id + "mdksddmk"}>{text.aboutdesc}</Text>))}
 
                      
                         <Link
