@@ -85,7 +85,7 @@ const ProductContainer = styled.div`
     border-radius: 1em;
     justify-content: center;
     margin: 1em;
-    height: 53vh;
+    height: 70vh;
     align-items: center;
     text-align: center;
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
