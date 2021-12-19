@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const Hero = () => {
     return (
         <Container id="hero">
             <Left>
-                <Title>{content[0].herotitle}</Title>
+                <Title>{content[0].herotitle || "MadKing"}</Title>
                 <ButtonContainer>
                     <Link
                         to="about"

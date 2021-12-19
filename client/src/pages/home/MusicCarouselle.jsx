@@ -52,7 +52,7 @@ const MusicCarouselle = () => {
 
     return (
         <Container id="beats">
-            <Title>{content[0].beatstitle}</Title>
+            <Title>{content[0].beatstitle || "Våre Beats"}</Title>
 
             <SliderContainer>
                 <Slider {...settings}>

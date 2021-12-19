@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import styled from "styled-components";
 import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
@@ -20,7 +20,7 @@ const About = () => {
     return (
         <Container id="about">
             <Left>
-                <Title>{content[0].abouttitle}</Title>
+                <Title>{content[0].abouttitle || "Om Oss"}</Title>
                 {width > 800 && (
                     <TextAndButtonContainer>
                         <Text>

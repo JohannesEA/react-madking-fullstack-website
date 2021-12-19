@@ -35,7 +35,7 @@ useEffect(() => {
     return (
         <Container id="process">
             <Top>
-                <Title>{content[0].workprocestitle}</Title>
+                <Title>{content[0].workprocestitle || "Hvordan Vi Jobber"}</Title>
             </Top>
 
             <Center>
