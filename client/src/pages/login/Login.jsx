@@ -53,6 +53,7 @@ const Container = styled.div`
     justify-content: center;
     flex-direction: column;
     padding: 10em 1em 5em 1em;
+    background-color: white;
 `;
 
 const LoginContainer = styled.div`

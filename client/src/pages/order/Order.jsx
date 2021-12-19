@@ -82,7 +82,10 @@ const Container = styled.div`
     padding-bottom: 2em;
     align-items: center;
     justify-content: center;
-    min-height: 40em;
+    min-height: 80vh;
+
+    background-color: white;
+
 `;
 
 const OrderDetailsContainer = styled.div`

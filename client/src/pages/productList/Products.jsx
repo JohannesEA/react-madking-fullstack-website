@@ -27,11 +27,12 @@ const Products = ({ item }) => {
             <ProductListContainer>
                 {products.map((prod, index) => (
                     <ProductContainer key={index}>
+                        <ImageContainer>
+                            <Image alt={prod._id} src={prod.img} />
+                        </ImageContainer>
                         <Title>{prod.title}</Title>
-                        <Image src={prod.img} alt={index} />
-                        <Price>{prod.price} kr</Price>
+                        <Price>{prod.price} KR</Price>
                         <Buttons>
-                            {" "}
                             <Button
                                 backgroundcolor="#3E768C"
                                 color="white"
@@ -40,15 +41,13 @@ const Products = ({ item }) => {
                             >
                                 Velg
                             </Button>
-                            <BsPlayBtn
+                            <Button
+                                backgroundcolor="#3E768C"
                                 color="white"
-                                fontSize="3.4em"
-                                fontWeight="100"
-
-                                // onClick={() => {
-                                //   handlePlaySong(musicCarouselleDummyData[slideItem.id - 1])
-                                // }}
-                            />
+                                hover="#558ba0"
+                            >
+                                Spill Av
+                            </Button>
                         </Buttons>
                     </ProductContainer>
                 ))}
@@ -61,6 +60,7 @@ export default Products;
 
 const Container = styled.div`
     text-align: center;
+    background-color:white;
 
     @media (max-width: 800px) {
         flex-direction: column;
@@ -70,37 +70,33 @@ const Container = styled.div`
 
 const ProductListContainer = styled.div`
     display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 1em;
+    grid-template-columns: repeat(3, 1fr);
 
     @media (max-width: 800px) {
-        grid-template-columns: auto auto;
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    @media (max-width: 600px) {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    } ;
 `;
 
 const ProductContainer = styled.div`
-    text-align: center;
-    margin: 1em 5px;
     border-radius: 1em;
-    background-color: #00a27f4b;
-    background-color: var(--color-1);
-    max-width: 20em;
-    max-height: 40em;
-    height: auto;
+    justify-content: center;
+    margin: 1em;
+    height: 53vh;
+    align-items: center;
+    text-align: center;
+    box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+    background-color: white;
 
     &:hover {
-        box-shadow: 0px -8px 20px 1px #767676;
+        box-shadow: 1px 2px 19px -1px #636363;
     }
+`;
 
-    @media (max-width: 800px) {
-        padding-bottom: 2em;
-    } ;
+const ImageContainer = styled.div`
+    justify-content: center;
+    height: 35vh;
+    align-items: center;
+    text-align: center;
 `;
 
 const SectionTitle = styled.h1`
@@ -115,23 +111,17 @@ const SectionTitle = styled.h1`
 
 const Title = styled.h1`
     font-size: 1.5rem;
-    color: white;
+    color: black;
 `;
 
 const Image = styled.img`
+    border-radius: 1em 1em 0 0;
+    height: 100%;
     width: 100%;
-    height: 60%;
-    max-width: 20em;
-    max-height: 35em;
-
-    @media (max-width: 600px) {
-        max-width: 15em;
-        max-height: 25em;
-    } ;
 `;
 
 const Price = styled.p`
-    color: white;
+    color: black;
     font-size: 1.2rem;
     font-weight: 200;
 `;

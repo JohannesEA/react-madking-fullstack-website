@@ -3,35 +3,28 @@ import { BsPlayBtn } from "react-icons/bs";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts } from "../../redux/apiCalls";
-import { useDispatch, useSelector } from "react-redux";
-///https://www.npmjs.com/package/react-responsive-carousel
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import {
-    CarouselProvider,
-    Slider,
-    Slide,
-    ButtonBack,
-    ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
-import { red } from "color-name";
+import { Provider, useDispatch, useSelector } from "react-redux";
+//https://react-slick.neostack.com/docs/get-started/
 import useWindowDimensions from "../../reusableFunctions/Functions";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.products);
+    const products = useSelector(state => state.product.products);
     const navigate = useNavigate();
     let path = "";
     const playButtonColor = "white";
     // const hoverColor = "#767676";
     const { height, width } = useWindowDimensions();
 
-    const handleClick = (item) => {
+    const handleClick = item => {
         path = "/products/" + item._id;
         navigate(path);
     };
 
-    const handlePlaySong = (item) => {
+    const handlePlaySong = item => {
         console.log("Play song ", item.title);
     };
 
@@ -42,147 +35,47 @@ const MusicCarouselle = () => {
     const size = products.length;
     const items = products.slice(0, size);
 
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: width > 1000 ?  3 : 1,
+        speed: 500,
+        
+    };
+
     return (
         <Container id="beats">
-            <Title>Våre Beats</Title>
+            <Title>Beats</Title>
 
-            {width > 450 ? (
-                <CarouselProvider
-                    naturalSlideWidth={100}
-                    naturalSlideHeight={125}
-                    totalSlides={size}
-                    infinite={true}
-                >
-                    <Slider>
-                        {items.map((prod, index) => (
-                            <Slide key={prod._id}>
-                                <ImageBoxContainer>
-                                    <Image src={prod.img} index={index} />
-                                    <Text>{prod.title}</Text>
-                                    <Buttons>
-                                        <Button
-                                            backgroundcolor="#3E768C"
-                                            color="white"
-                                            hover="#558ba0"
-                                            onClick={() => handleClick(prod)}
-                                        >
-                                            Velg
-                                        </Button>
-                                        <BsPlayBtn
-                                            color={playButtonColor}
-                                            fontSize="3.4em"
-                                            fontWeight="100"
-                                            onClick={() => {
-                                                handlePlaySong(prod);
-                                            }}
-                                        />
-                                    </Buttons>
-                                </ImageBoxContainer>
-                                <ButtonBack
-                                    style={{
-                                        color: "black",
-                                        zIndex: 1,
-                                        padding: "14px 18px",
-                                        transition: "all 0.2s ease",
-                                        fontWeight: "600",
-                                        margin: "1em .5em",
-                                        cursor: "pointer",
-                                        border: "none",
-                                        borderRadius: "1.5em ",
-                                        backgroundColor: "white",
-                                    }}
+            <SliderContainer>
+                <Slider {...settings}>
+                    {items.map((prod, index) => (
+                        <SliderItem key={index}>
+                            <ImageContainer>
+                                <Image alt={prod._id} src={prod.img} />
+                            </ImageContainer>
+                            <Text>{prod.title}</Text>
+                            <Buttons>
+                                <Button
+                                    backgroundcolor=""
+                                    color=""
+                                    hover=""
+                                    onClick={() => handleClick(prod)}
                                 >
-                                    Forrige
-                                </ButtonBack>
-                                <ButtonNext
-                                    style={{
-                                        color: "black",
-                                        zIndex: 1,
-                                        padding: "14px 18px",
-                                        margin: "1em .5em",
-                                        transition: "all 0.2s ease",
-                                        fontWeight: "600",
-                                        cursor: "pointer",
-                                        border: "none",
-                                        borderRadius: "1.5em ",
-                                        backgroundColor: "white",
-                                    }}
-                                >
-                                    Neste
-                                </ButtonNext>
-                            </Slide>
-                        ))}
-                    </Slider>
-                </CarouselProvider>
-            ) : (
-                <CarouselProvider
-                    naturalSlideWidth={100}
-                    naturalSlideHeight={150}
-                    totalSlides={size}
-                    infinite={true}
-                >
-                    <Slider>
-                        {items.map((prod, index) => (
-                            <Slide key={prod._id}>
-                                <ImageBoxContainer>
-                                    <Image src={prod.img} index={index} />
-                                    <Text>{prod.title}</Text>
-                                    <Buttons>
-                                        <Button
-                                            backgroundcolor="#3E768C"
-                                            color="white"
-                                            hover="#558ba0"
-                                            onClick={() => handleClick(prod)}
-                                        >
-                                            Velg
-                                        </Button>
-                                        <BsPlayBtn
-                                            color={playButtonColor}
-                                            fontSize="3.4em"
-                                            fontWeight="100"
-                                            onClick={() => {
-                                                handlePlaySong(prod);
-                                            }}
-                                        />
-                                    </Buttons>
-                                </ImageBoxContainer>
-                                <ButtonBack
-                                    style={{
-                                        color: "black",
-                                        zIndex: 1,
-                                        padding: "14px 18px",
-                                        transition: "all 0.2s ease",
-                                        fontWeight: "600",
-                                        margin: "1em .5em",
-                                        cursor: "pointer",
-                                        border: "none",
-                                        borderRadius: "1.5em ",
-                                        backgroundColor: "white",
-                                    }}
-                                >
-                                    Forrige
-                                </ButtonBack>
-                                <ButtonNext
-                                    style={{
-                                        color: "black",
-                                        zIndex: 1,
-                                        padding: "14px 18px",
-                                        margin: "1em .5em",
-                                        transition: "all 0.2s ease",
-                                        fontWeight: "600",
-                                        cursor: "pointer",
-                                        border: "none",
-                                        borderRadius: "1.5em ",
-                                        backgroundColor: "white",
-                                    }}
-                                >
-                                    Neste
-                                </ButtonNext>
-                            </Slide>
-                        ))}
-                    </Slider>
-                </CarouselProvider>
-            )}
+                                    Velg
+                                </Button>
+                                <Button               backgroundcolor="#3E768C"
+                        color="white"
+                        hover="#558ba0">
+                                    Spill Av
+                                </Button>
+                            </Buttons>
+                        </SliderItem>
+                    ))}
+                </Slider>
+            </SliderContainer>
         </Container>
     );
 };
@@ -190,42 +83,51 @@ const MusicCarouselle = () => {
 export default MusicCarouselle;
 
 const Container = styled.div`
-    max-height: 55em;
-    padding-top: 3em;
-    padding-bottom: 2em;
     text-align: center;
-    transition: all 0.5s ease;
     background-color: var(--color-2);
-    @media (max-width: 800px) {
-        max-height: 50em;
-        min-height: 45em;
-    }
+    height: auto;
+    padding-bottom: 2em;
 `;
 
-const ImageBoxContainer = styled.div`
-    display: flex;
-    align-items: center;
+const SliderContainer = styled.div`
+    text-align: center;
+    background-color: var(--color-2);
+    height: auto;
+
+`;
+
+const SliderItem = styled.div`
     justify-content: center;
-    flex-direction: column;
+    height: 65vh;
+    align-items: center;
+    text-align: center;
+    margin: 1em;
+    padding: 1em;
+
+    box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+
+
+&:hover {
+    box-shadow: -1px 0px 37px -1px rgba(0,0,0,0.75);
+}
+    
+`;
+
+const ImageContainer = styled.div`
+    justify-content: center;
+    height: 48vh;
+    align-items: center;
+    text-align: center;
 `;
 
 const Image = styled.img`
-    max-height: 35em;
-    max-width: 40em;
-    height: 35em;
-    width: 40em;
     border-radius: 1em;
-    @media (max-width: 800px) {
-        max-height: 25em;
-        max-width: 20em;
-    }
-    @media (max-width: 400px) {
-        max-height: 20em;
-        max-width: 15em;
-    }
+    height: 100%;
+    width: 100%;
 `;
 
 const Text = styled.p`
+    font-size:1.5rem;
     color: white;
 `;
 
@@ -237,8 +139,8 @@ const Buttons = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 2;
-    min-width: 8em;
+    max-width: 15em;
+    margin: 0 auto;
 `;
 
 const Button = styled.button`
@@ -249,10 +151,10 @@ const Button = styled.button`
     cursor: pointer;
     border: none;
     border-radius: 1.5em;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
+    background-color: ${props => props.backgroundcolor};
+    color: ${props => props.color};
     &:hover {
-        background-color: ${(props) => props.hover};
+        background-color: ${props => props.hover};
         border-radius: 0.5em;
         box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
     }

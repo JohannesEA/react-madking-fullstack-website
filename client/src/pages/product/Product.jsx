@@ -39,26 +39,31 @@ const Product = ({ item }) => {
 
     return (
         <Container>
-            {width > 800 && (
-                <ProductContainer>
-                    <ProductImage src={product.img} alt="test" />
-                </ProductContainer>
-            )}
-
-            {width < 800 && <ProductImage src={product.img} alt="test" />}
+            <ImageContainer>
+                <Image src={product.img} alt={product.title} />
+            </ImageContainer>
 
             <ProductInformationContainer>
-                <ProductTitle color="black">{product.title}</ProductTitle>
-                <ProductDesc>{product.description}</ProductDesc>
-                <ProductPrice>Pris: {product.price} Kr</ProductPrice>
-                <Button
-                    backgroundcolor="#3E768C"
-                    color="white"
-                    hover="#558ba0"
-                    onClick={handleClick}
-                >
-                    Legg til i handleliste
-                </Button>{" "}
+                <Title color="black">{product.title}</Title>
+                <Desctiption>{product.description}</Desctiption>
+                <Price>Pris: {product.price} KR</Price>
+                <Buttons>
+                    <Button
+                        backgroundcolor="#3E768C"
+                        color="white"
+                        hover="#558ba0"
+                        onClick={handleClick}
+                    >
+                        Legg Til I Handlekurv
+                    </Button>
+                    <Button
+                        backgroundcolor="#3E768C"
+                        color="white"
+                        hover="#558ba0"
+                    >
+                        Spill Av
+                    </Button>
+                </Buttons>
             </ProductInformationContainer>
         </Container>
     );
@@ -68,46 +73,44 @@ export default Product;
 
 const Container = styled.div`
     display: flex;
+    background-color: white;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    padding: 6em 1em 1em 1em;
-    height: auto;
+    height: 80vh;
+    padding: 5em 0 0 1em;
+
     @media (max-width: 800px) {
         flex-direction: column;
         padding-top: 7em;
     } ;
 `;
 
-const ProductContainer = styled.div`
-    flex: 1;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2em;
-`;
-
-const ProductTitle = styled.h1`
+const Title = styled.h1`
     font-size: 1.5rem;
     color: ${(props) => props.color};
 `;
 
-const ProductImage = styled.img`
-    max-height: 70vh;
-    max-width: 100%;
+const ImageContainer = styled.div`
+    justify-content: center;
+    height: 50vh;
+    width: 40vh;
+    align-items: center;
+    text-align: center;
     border-radius: 1em;
-    box-shadow: 0px 11px 15px 5px #000000;
+    box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
 
-    @media (max-width: 800px) {
-        max-height: 40vh;
-        max-width: 35vh;
-        box-shadow: 0px 11px 15px 5px #636363;
-    }
 
     &:hover {
-        box-shadow: 0px 11px 15px 5px #636363;
+        box-shadow: -1px 0px 37px -1px rgba(0,0,0,0.75);
     }
+
+`;
+
+const Image = styled.img`
+    border-radius: 1em;
+    height: 100%;
+    width: 100%;
 `;
 
 const ProductInformationContainer = styled.div`
@@ -115,18 +118,28 @@ const ProductInformationContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 2em;
+    height: 50vh;
+    max-width: 50vh;
 `;
 
-const ProductDesc = styled.p`
+const Desctiption = styled.p`
     font-size: 1.2rem;
     color: black;
 `;
 
-const ProductPrice = styled.p`
+const Price = styled.p`
     font-size: 1.2rem;
     font-weight: 800;
     color: black;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Button = styled.button`
