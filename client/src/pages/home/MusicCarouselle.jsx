@@ -48,8 +48,8 @@ const MusicCarouselle = () => {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
-        slidesToShow: width > 1000 ? 3 : 1,
+        centerPadding: "100px",
+        slidesToShow: width > 800 ? 3 : 1,
         speed: 500
     };
 
@@ -109,7 +109,7 @@ const SliderContainer = styled.div`
 
 const SliderItem = styled.div`
     justify-content: center;
-    height: 68vh;
+    height: 70vh;
     align-items: center;
     text-align: center;
     margin: 1em;
