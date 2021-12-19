@@ -109,7 +109,7 @@ const SliderContainer = styled.div`
 
 const SliderItem = styled.div`
     justify-content: center;
-    height: 70vh;
+    height: 75vh;
     align-items: center;
     text-align: center;
     margin: 1em;
