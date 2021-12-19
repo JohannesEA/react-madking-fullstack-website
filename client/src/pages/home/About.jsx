@@ -1,21 +1,30 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
+import { useDispatch, useSelector } from "react-redux";
+import { getContent } from "../../redux/apiCalls";
+
+
+
 
 const About = () => {
     const { width } = useWindowDimensions();
+    const content = useSelector(state => state.content.contents);
+    const dispatch = useDispatch(); 
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
 
     return (
         <Container id="about">
             <Left>
-                <Title>Om Oss</Title>
+                <Title>{content[0].abouttitle}</Title>
                 {width > 800 && (
                     <TextAndButtonContainer>
                         <Text>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Accusamus temporibus totam a eum voluptates
-                            molestias sint asperiores pariatur ex tenetur!
+                          {content[0].aboutdesc}
                         </Text>
 
                         <Link

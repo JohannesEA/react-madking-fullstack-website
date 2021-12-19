@@ -98,11 +98,12 @@ const SliderContainer = styled.div`
 
 const SliderItem = styled.div`
     justify-content: center;
-    height: 65vh;
+    height: 68vh;
     align-items: center;
     text-align: center;
-    margin: 1em;
+    margin: 1em ;
     padding: 1em;
+    border-radius: 1em;
 
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
     @media (max-width: 500px) {
@@ -122,6 +123,11 @@ const ImageContainer = styled.div`
     height: 48vh;
     align-items: center;
     text-align: center;
+
+    @media (max-width: 500px) {
+        height: 35vh;
+
+    }
 `;
 
 const Image = styled.img`

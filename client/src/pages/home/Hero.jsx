@@ -1,15 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import { useDispatch, useSelector } from "react-redux";
+import { getContent } from "../../redux/apiCalls";
+
 
 const Hero = () => {
-    // const { height, width } = useWindowDimensions();
-    // import useWindowDimensions from "../../reusableFunctions/Functions";
+    const content = useSelector(state => state.content.contents);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
+    
 
     return (
         <Container id="hero">
             <Left>
-                <Title>Finn beaten som passer for ditt prosjekt!</Title>
+                <Title>{content[0].herotitle}</Title>
                 <ButtonContainer>
                     <Link
                         to="about"

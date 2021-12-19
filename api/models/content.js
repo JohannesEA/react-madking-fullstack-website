@@ -11,6 +11,7 @@ const ContentSchema = new mongoose.Schema({
   workprocesstwo: { type: String, required: false },
   workprocessthree: { type: String, required: false },
   workprocessfour: { type: String, required: false },
+  beatstitle: { type: String, required: false },
 });
 
 module.exports = mongoose.model("Content", ContentSchema);

@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
+import { useDispatch, useSelector } from "react-redux";
+import { getContent } from "../../redux/apiCalls";
 
 const ProcessOfWork = () => {
     const { width } = useWindowDimensions();
     const [processText, setProcessText] = useState("Trykk på sirklene");
 
+
+const content = useSelector(state => state.content.contents);
+const dispatch = useDispatch(); 
+useEffect(() => {
+    getContent(dispatch);
+}, [dispatch]);
+
     const handleFirstStepContent = () => {
-        setProcessText("Tekst for første del av prosessen");
+        setProcessText(content[0].workprocessone);
     };
 
     const handleSecondStepContent = () => {
-        setProcessText("Tekst for andre del av prosessen");
+        setProcessText(content[0].workprocesstwo);
     };
 
     const handleThirdStepContent = () => {
-        setProcessText("Tekst for tredje del av prosessen");
+        setProcessText(content[0].workprocessthree);
     };
 
     const handleFourthStepContent = () => {
-        setProcessText("Tekst for fjerde del av prosessen");
+        setProcessText(content[0].workprocessfour);
     };
 
     return (
         <Container id="process">
             <Top>
-                <Title>Hvordan Vi Jobber</Title>
+                <Title>{content[0].workprocestitle}</Title>
             </Top>
 
             <Center>

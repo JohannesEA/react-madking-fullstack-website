@@ -12,8 +12,19 @@ import {
     updateProductSuccess,
     addProductFailure,
     addProductStart,
-    addProductSuccess,
+    addProductSuccess
 } from "./productRedux";
+import {
+    getContentFailure,
+    getContentStart,
+    getContentSuccess,
+    addContentFailure,
+    addContentStart,
+    addContentSuccess,
+    updateContentFailure,
+    updateContentStart,
+    updateContentSuccess
+} from "./contentRedux";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
@@ -26,7 +37,7 @@ export const login = async (dispatch, user) => {
         console.log("Login Failed!", err);
     }
 };
-export const getProducts = async (dispatch) => {
+export const getProducts = async dispatch => {
     dispatch(getProductStart());
     try {
         const res = await publicRequest.get("api/products");
@@ -65,12 +76,32 @@ export const addProduct = async (product, dispatch) => {
     }
 };
 
-export const addHeroTitle = async (title, dispatch) => {
-    dispatch(addProductStart());
+export const getContent = async dispatch => {
+    dispatch(getContentStart());
     try {
-        const res = await userRequest.post(`api/herotitle`, title);
-        dispatch(addProductSuccess(res.data));
+        const res = await publicRequest.get("api/contents");
+        dispatch(getContentSuccess(res.data));
     } catch (err) {
-        dispatch(addProductFailure());
+        dispatch(getContentFailure());
+    }
+};
+
+export const addContent = async (content, dispatch) => {
+    dispatch(addContentStart());
+    try {
+        const res = await userRequest.post(`api/contents`, content);
+        dispatch(addContentSuccess(res.data));
+    } catch (err) {
+        dispatch(addContentFailure());
+    }
+};
+
+export const updateContent = async (id, content, dispatch) => {
+    dispatch(updateContentStart());
+    try {
+        // update
+        dispatch(updateContentSuccess({ id, content }));
+    } catch (err) {
+        dispatch(updateContentFailure());
     }
 };

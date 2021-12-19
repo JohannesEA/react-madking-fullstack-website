@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
 import cartReducer from "./cartRedux";
+import contentReducer from "./contentRedux";
 
 import {
     persistStore,
@@ -11,27 +12,28 @@ import {
     PAUSE,
     PERSIST,
     PURGE,
-    REGISTER,
+    REGISTER
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
     key: "root",
     version: 1,
-    storage,
+    storage
 };
 
 const rootReducer = combineReducers({
     cart: cartReducer,
     user: userReducer,
     product: productReducer,
+    content: contentReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
+    middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [
@@ -40,10 +42,10 @@ export const store = configureStore({
                     PAUSE,
                     PERSIST,
                     PURGE,
-                    REGISTER,
-                ],
-            },
-        }),
+                    REGISTER
+                ]
+            }
+        })
 });
 
 export let persistor = persistStore(store);
