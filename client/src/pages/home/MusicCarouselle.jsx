@@ -41,6 +41,9 @@ const MusicCarouselle = () => {
     const size = products.length;
     const items = products.slice(0, size);
 
+    const contsize = content.length;
+    const contents = content.slice(0, contsize);
+
     const settings = {
         className: "center",
         centerMode: true,
@@ -52,7 +55,7 @@ const MusicCarouselle = () => {
 
     return (
         <Container id="beats">
-            <Title>{content[0].beatstitle || "Våre Beats"}</Title>
+            {contents.map(title => (<Title>{title.beatstitle}</Title>))}
 
             <SliderContainer>
                 <Slider {...settings}>

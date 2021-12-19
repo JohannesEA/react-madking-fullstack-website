@@ -9,6 +9,8 @@ const Hero = () => {
     const content = useSelector(state => state.content.contents);
     const dispatch = useDispatch();
 
+    const size = content.length;
+    const contents = content.slice(0, size);
 
     useEffect(() => {
         getContent(dispatch);
@@ -19,7 +21,7 @@ const Hero = () => {
     return (
         <Container id="hero">
             <Left>
-                <Title>{content[0].herotitle || "MadKing"}</Title>
+                {contents.map(title => (<Title>{title.herotitle}</Title>))}
                 <ButtonContainer>
                     <Link
                         to="about"

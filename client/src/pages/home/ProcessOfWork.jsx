@@ -12,6 +12,11 @@ const ProcessOfWork = () => {
 
 const content = useSelector(state => state.content.contents);
 const dispatch = useDispatch(); 
+
+
+const size = content.length;
+const contents = content.slice(0, size);
+
 useEffect(() => {
     getContent(dispatch);
 }, [dispatch]);
@@ -35,7 +40,7 @@ useEffect(() => {
     return (
         <Container id="process">
             <Top>
-                <Title>{content[0].workprocestitle || "Hvordan Vi Jobber"}</Title>
+            {contents.map(title => (<Title>{title.workprocestitle}</Title>))}
             </Top>
 
             <Center>

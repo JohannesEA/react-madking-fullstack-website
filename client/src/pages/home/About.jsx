@@ -12,6 +12,11 @@ const About = () => {
     const { width } = useWindowDimensions();
     const content = useSelector(state => state.content.contents);
     const dispatch = useDispatch(); 
+
+    const size = content.length;
+    const contents = content.slice(0, size);
+
+
     useEffect(() => {
         getContent(dispatch);
     }, [dispatch]);
@@ -20,7 +25,7 @@ const About = () => {
     return (
         <Container id="about">
             <Left>
-                <Title>{content[0].abouttitle || "Om Oss"}</Title>
+            {contents.map(title => (<Title>{title.abouttitle}</Title>))}
                 {width > 800 && (
                     <TextAndButtonContainer>
                         <Text>
