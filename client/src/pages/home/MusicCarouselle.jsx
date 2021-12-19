@@ -9,27 +9,28 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import audio from "../../mixaund-inspiring-happy-morning.mp3"
-
+import audio from "../../mixaund-inspiring-happy-morning.mp3";
+import { useRef } from "react";
 
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products);
     const content = useSelector(state => state.content.contents);
     const [isPlaying, setIsPlaying] = useState(false);
-
-    const navigate = useNavigate();
-    let path = "";
     const playButtonColor = "white";
     // const hoverColor = "#767676";
     const { height, width } = useWindowDimensions();
+    const audiotoplay = new Audio(audio);
+    let path = "";
+    const navigate = useNavigate();
 
     const handleClick = item => {
         path = "/products/" + item._id;
         navigate(path);
     };
-
-
+    useEffect(() => {
+        isPlaying ? audiotoplay.play() : audiotoplay.pause();
+    }, [isPlaying]);
 
     useEffect(() => {
         getProducts(dispatch);
@@ -45,24 +46,6 @@ const MusicCarouselle = () => {
     const contsize = content.length;
     const contents = content.slice(0, contsize);
 
-    const handlePlaySong = () => {
-        const audiotoplay = new Audio(audio);
-
-        if (isPlaying) {
-          // Pause the song if it is playing
-          audiotoplay.pause();
-          audiotoplay.volume(0);
-          console.log("Pause")
-        } else {
-          // Play the song if it is paused
-          audiotoplay.play();
-          console.log("Spill av")
-        }
-    
-        // Change the state of song
-        setIsPlaying(!isPlaying);
-    }
-
     const settings = {
         className: "center",
         centerMode: true,
@@ -74,7 +57,9 @@ const MusicCarouselle = () => {
 
     return (
         <Container id="beats">
-            {contents.map(title => (<Title key={title._id + "mdkdcdasmk"}>{title.beatstitle}</Title>))}
+            {contents.map(title => (
+                <Title key={title._id + "mdkdcdasmk"}>{title.beatstitle}</Title>
+            ))}
 
             <SliderContainer>
                 <Slider {...settings}>
@@ -97,10 +82,9 @@ const MusicCarouselle = () => {
                                     backgroundcolor="#3E768C"
                                     color="white"
                                     hover="#558ba0"
-                                    onClick={handlePlaySong}
-
+                                    onClick={() => setIsPlaying(!isPlaying)}
                                 >
-                                    {!isPlaying ? "Spill Av": "Pause"}
+                                    {!isPlaying ? "Spill Av" : "Pause"}
                                 </Button>
                             </Buttons>
                         </SliderItem>
