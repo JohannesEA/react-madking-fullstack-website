@@ -75,6 +75,10 @@ const ProductListContainer = styled.div`
     @media (max-width: 800px) {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    @media (max-width: 300px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const ProductContainer = styled.div`
@@ -93,7 +97,7 @@ const ProductContainer = styled.div`
 
     @media (max-width: 500px) {
         height: auto;
-
+        min-height: 37vh;
     }
 `;
 
@@ -102,6 +106,11 @@ const ImageContainer = styled.div`
     height: 35vh;
     align-items: center;
     text-align: center;
+
+    @media (max-width: 500px) {
+        height: 20vh;
+
+    }
 `;
 
 const SectionTitle = styled.h1`
@@ -136,6 +145,7 @@ const Buttons = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1em;
 `;
 const Button = styled.button`
     padding: 14px 18px;
