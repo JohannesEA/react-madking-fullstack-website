@@ -5,6 +5,8 @@ const cors = require("cors");
 const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const contentRoute = require("./routes/content");
+
 // const path = require('path');
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/contents", contentRoute);
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.join(__dirname, "./client/build")));

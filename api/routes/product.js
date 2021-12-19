@@ -1,6 +1,5 @@
 const Product = require("../models/product");
 const {
-  verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
 } = require("./verifyToken");
@@ -66,7 +65,9 @@ router.get("/", async (req, res) => {
     let products;
 
     if (queryNew) {
-      products = await Product.find().sort({ createdAt: -1 }).limit(1);
+      products = await Product.find()
+        .sort({ createdAt: -1 })
+        .limit(1);
     } else if (queryCategory) {
       products = await Product.find({
         categories: {
