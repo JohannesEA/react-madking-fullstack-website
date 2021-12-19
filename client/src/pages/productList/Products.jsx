@@ -90,6 +90,11 @@ const ProductContainer = styled.div`
     &:hover {
         box-shadow: 1px 2px 19px -1px #636363;
     }
+
+    @media (max-width: 500px) {
+        height: auto;
+
+    }
 `;
 
 const ImageContainer = styled.div`
@@ -147,5 +152,11 @@ const Button = styled.button`
         background-color: ${(props) => props.hover};
         border-radius: 0.5em;
         box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
+    }
+
+    @media (max-width: 500px) {
+        height: auto;
+        padding: 10px 14px;
+
     }
 `;

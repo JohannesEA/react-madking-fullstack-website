@@ -59,9 +59,9 @@ const MusicCarouselle = () => {
                             <Text>{prod.title}</Text>
                             <Buttons>
                                 <Button
-                                    backgroundcolor=""
-                                    color=""
-                                    hover=""
+                                    backgroundcolor="#e1e1e1"
+                                    color="black"
+                                    hover="#fff"
                                     onClick={() => handleClick(prod)}
                                 >
                                     Velg
@@ -105,6 +105,10 @@ const SliderItem = styled.div`
     padding: 1em;
 
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+    @media (max-width: 500px) {
+        height: auto;
+
+    }
 
 
 &:hover {
@@ -158,4 +162,11 @@ const Button = styled.button`
         border-radius: 0.5em;
         box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
     }
+
+    @media (max-width: 400px) {
+        padding: 10px 14px;
+
+    }
+
+
 `;
