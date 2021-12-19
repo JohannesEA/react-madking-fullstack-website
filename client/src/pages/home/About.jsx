@@ -28,10 +28,9 @@ const About = () => {
             {contents.map(title => (<Title>{title.abouttitle}</Title>))}
                 {width > 800 && (
                     <TextAndButtonContainer>
-                        <Text>
-                          {content[0].aboutdesc}
-                        </Text>
+                                    {contents.map(text => (<Text>{text.aboutdesc}</Text>))}
 
+                     
                         <Link
                             to="contact"
                             className="nav-logo"
