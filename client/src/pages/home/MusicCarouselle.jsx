@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { BsPlayBtn } from "react-icons/bs";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../../redux/apiCalls";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { getProducts, getContent } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
 //https://react-slick.neostack.com/docs/get-started/
 import useWindowDimensions from "../../reusableFunctions/Functions";
 import Slider from "react-slick";
@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick-theme.css";
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products);
+    const content = useSelector(state => state.content.contents);
+
     const navigate = useNavigate();
     let path = "";
     const playButtonColor = "white";
@@ -32,6 +34,10 @@ const MusicCarouselle = () => {
         getProducts(dispatch);
     }, [dispatch]);
 
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
     const size = products.length;
     const items = products.slice(0, size);
 
@@ -40,14 +46,13 @@ const MusicCarouselle = () => {
         centerMode: true,
         infinite: true,
         centerPadding: "60px",
-        slidesToShow: width > 1000 ?  3 : 1,
-        speed: 500,
-        
+        slidesToShow: width > 1000 ? 3 : 1,
+        speed: 500
     };
 
     return (
         <Container id="beats">
-            <Title>Beats</Title>
+            <Title>{content[0].beatstitle}</Title>
 
             <SliderContainer>
                 <Slider {...settings}>
@@ -66,9 +71,13 @@ const MusicCarouselle = () => {
                                 >
                                     Velg
                                 </Button>
-                                <Button               backgroundcolor="#3E768C"
-                        color="white"
-                        hover="#558ba0">
+                                <Button
+                                    backgroundcolor="#3E768C"
+                                    color="white"
+                                    hover="#558ba0"
+                                    onClick={() => handlePlaySong(prod)}
+
+                                >
                                     Spill Av
                                 </Button>
                             </Buttons>
@@ -93,7 +102,6 @@ const SliderContainer = styled.div`
     text-align: center;
     background-color: var(--color-2);
     height: auto;
-
 `;
 
 const SliderItem = styled.div`
@@ -101,21 +109,18 @@ const SliderItem = styled.div`
     height: 68vh;
     align-items: center;
     text-align: center;
-    margin: 1em ;
+    margin: 1em;
     padding: 1em;
     border-radius: 1em;
 
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
     @media (max-width: 500px) {
         height: auto;
-
     }
 
-
-&:hover {
-    box-shadow: -1px 0px 37px -1px rgba(0,0,0,0.75);
-}
-    
+    &:hover {
+        box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
+    }
 `;
 
 const ImageContainer = styled.div`
@@ -126,7 +131,6 @@ const ImageContainer = styled.div`
 
     @media (max-width: 500px) {
         height: 35vh;
-
     }
 `;
 
@@ -137,7 +141,7 @@ const Image = styled.img`
 `;
 
 const Text = styled.p`
-    font-size:1.5rem;
+    font-size: 1.5rem;
     color: white;
 `;
 
@@ -171,8 +175,5 @@ const Button = styled.button`
 
     @media (max-width: 400px) {
         padding: 10px 14px;
-
     }
-
-
 `;
