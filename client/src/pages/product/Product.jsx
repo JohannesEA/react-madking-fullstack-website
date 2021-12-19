@@ -77,8 +77,9 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    height: 80vh;
+    min-height: 80vh;
     padding: 5em 0 0 1em;
+    height: auto;
 
     @media (max-width: 800px) {
         flex-direction: column;
