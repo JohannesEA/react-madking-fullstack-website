@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BsPlayBtn } from "react-icons/bs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts, getContent } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,11 +9,14 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import audio from "../../mixaund-inspiring-happy-morning.mp3"
+
 
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products);
     const content = useSelector(state => state.content.contents);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const navigate = useNavigate();
     let path = "";
@@ -26,9 +29,7 @@ const MusicCarouselle = () => {
         navigate(path);
     };
 
-    const handlePlaySong = item => {
-        console.log("Play song ", item.title);
-    };
+
 
     useEffect(() => {
         getProducts(dispatch);
@@ -43,6 +44,24 @@ const MusicCarouselle = () => {
 
     const contsize = content.length;
     const contents = content.slice(0, contsize);
+
+    const handlePlaySong = () => {
+        const audiotoplay = new Audio(audio);
+
+        if (isPlaying) {
+          // Pause the song if it is playing
+          audiotoplay.pause();
+          audiotoplay.volume(0);
+          console.log("Pause")
+        } else {
+          // Play the song if it is paused
+          audiotoplay.play();
+          console.log("Spill av")
+        }
+    
+        // Change the state of song
+        setIsPlaying(!isPlaying);
+    }
 
     const settings = {
         className: "center",
@@ -78,10 +97,10 @@ const MusicCarouselle = () => {
                                     backgroundcolor="#3E768C"
                                     color="white"
                                     hover="#558ba0"
-                                    onClick={() => handlePlaySong(prod)}
+                                    onClick={handlePlaySong}
 
                                 >
-                                    Spill Av
+                                    {!isPlaying ? "Spill Av": "Pause"}
                                 </Button>
                             </Buttons>
                         </SliderItem>

@@ -5,6 +5,7 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
+import audio from "../../mixaund-inspiring-happy-morning.mp3"
 
 const Product = ({ item }) => {
     const { width } = useWindowDimensions();
@@ -37,6 +38,10 @@ const Product = ({ item }) => {
         dispatch(addProduct({ ...product }));
     };
 
+    let audiotoplay = new Audio(audio);
+    const handlePlaySong = () => {
+        audiotoplay.play();
+    }
     return (
         <Container>
             <ImageContainer>
@@ -60,6 +65,7 @@ const Product = ({ item }) => {
                         backgroundcolor="#3E768C"
                         color="white"
                         hover="#558ba0"
+                        onClick={handlePlaySong}
                     >
                         Spill Av
                     </Button>
