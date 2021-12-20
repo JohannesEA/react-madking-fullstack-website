@@ -1,18 +1,27 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsPlayBtn } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
+import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
+import audio from "../../mixaund-inspiring-happy-morning.mp3";
+const audiotoplay = new Audio(audio);
+
 
 const Products = ({ item }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         getProducts(dispatch);
     }, [dispatch]);
+
+    useEffect(() => {
+        isPlaying ? audiotoplay.play() : audiotoplay.pause();
+    }, [isPlaying]);
 
     let path = "";
     const handleClick = (item) => {
@@ -41,13 +50,7 @@ const Products = ({ item }) => {
                             >
                                 Velg
                             </Button>
-                            <Button
-                                backgroundcolor="#3E768C"
-                                color="white"
-                                hover="#558ba0"
-                            >
-                                Spill Av
-                            </Button>
+                            {!isPlaying ? <AiOutlinePlayCircle color="black" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="black" fontSize={50} onClick={() => setIsPlaying(false)} />}
                         </Buttons>
                     </ProductContainer>
                 ))}
@@ -143,10 +146,18 @@ const Price = styled.p`
 
 const Buttons = styled.div`
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 1em;
+    justify-content: space-between;
+    max-width: 15em;
+    margin: 0 auto;
+
+    @media (max-width: 800px) {
+        max-width: 12em;
+    }
+
+    @media (max-width: 400px) {
+        max-width: 10em;
+    }
 `;
 const Button = styled.button`
     padding: 14px 18px;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BsPlayBtn } from "react-icons/bs";
+import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProducts, getContent } from "../../redux/apiCalls";
@@ -11,6 +11,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import audio from "../../mixaund-inspiring-happy-morning.mp3";
 import { useRef } from "react";
+const audiotoplay = new Audio(audio);
+
 
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
@@ -18,9 +20,7 @@ const MusicCarouselle = () => {
     const content = useSelector(state => state.content.contents);
     const [isPlaying, setIsPlaying] = useState(false);
     const playButtonColor = "white";
-    // const hoverColor = "#767676";
     const { height, width } = useWindowDimensions();
-    const audiotoplay = new Audio(audio);
     let path = "";
     const navigate = useNavigate();
 
@@ -47,10 +47,11 @@ const MusicCarouselle = () => {
     const contents = content.slice(0, contsize);
 
     const settings = {
+        dots: true,
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "100px",
+        centerPadding: "60px",
         slidesToShow: width > 800 ? 3 : 1,
         speed: 500
     };
@@ -78,14 +79,10 @@ const MusicCarouselle = () => {
                                 >
                                     Velg
                                 </Button>
-                                <Button
-                                    backgroundcolor="#3E768C"
-                                    color="white"
-                                    hover="#558ba0"
-                                    onClick={() => setIsPlaying(!isPlaying)}
-                                >
-                                    {!isPlaying ? "Spill Av" : "Pause"}
-                                </Button>
+
+                         
+                                    {!isPlaying ? <AiOutlinePlayCircle color="white" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="white" fontSize={50} onClick={() => setIsPlaying(false)} />}
+                            
                             </Buttons>
                         </SliderItem>
                     ))}
@@ -105,13 +102,14 @@ const Container = styled.div`
 `;
 
 const SliderContainer = styled.div`
-    text-align: center;
     background-color: var(--color-2);
     height: auto;
+    width: 100%;
 `;
 
 const SliderItem = styled.div`
     justify-content: center;
+    width: 100%;
     height: 75vh;
     align-items: center;
     text-align: center;

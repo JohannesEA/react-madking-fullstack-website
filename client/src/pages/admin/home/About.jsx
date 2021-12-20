@@ -1,24 +1,100 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import styled from "styled-components";
+import {updateContent, getContent} from "../../../redux/apiCalls"
+import { useDispatch, useSelector } from "react-redux";
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+} from "firebase/storage";
+import app from "../../../firebase";
 
 const About = () => {
+    const content = useSelector(state => state.content.contents);
+
+    const size = content.length;
+    const contents = content.slice(0, size);
+
     const [userInput, setUserInput] = useState({
-        title: "",
-        image: "",
-        text: "",
+        herotitle: contents[0].herotitle,
+        heroimg: contents[0].heroimg,
+        abouttitle: "",
+        aboutdesc: "",
+        aboutimg: "",
+        workprocestitle: contents[0].workprocestitle,
+        workprocessone: contents[0].workprocessone,
+        workprocesstwo: contents[0].workprocesstwo,
+        workprocessthree:contents[0].workprocessthree,
+        workprocessfour: contents[0].workprocessfour,
+        beatstitle: contents[0].beatstitle
     });
 
-    //Get input values
-    const handleChange = (e) => {
-        e.persist();
-        let value = e.target.value;
-        setUserInput({ ...userInput, [e.target.name]: value });
-    };
+    const dispatch = useDispatch(); 
 
-    const handleClick = (e) => {
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
+        //Get input values
+        const handleChange = (e) => {
+            e.persist();
+            let value = e.target.value;
+            let name = e.target.name;
+
+            switch (name) {
+                case "aboutimg":
+                    setUserInput({ ...userInput, [name]: e.target.files[0] });
+                    break;
+                default:
+                    setUserInput({ ...userInput, [name]: value });
+            }
+        };
+
+
+    const handleUpdateAboutContent = (e) => {
         e.preventDefault();
         console.log(userInput);
+        // addProduct(userInput, dispatch)
+        const fileName = new Date().getTime() + userInput.aboutimg.name;
+        const storage = getStorage(app);
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, userInput.aboutimg);
+
+        //https://firebase.google.com/docs/storage/web/upload-files
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                    case "paused":
+                        console.log("Upload is paused");
+                        break;
+                    case "running":
+                        console.log("Upload is running");
+                        break;
+                    default:
+                }
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    const content = { ...userInput, aboutimg: downloadURL };
+                    console.log(content);
+                    updateContent(contents[0]._id ,content, dispatch);
+                });
+            }
+        );
     };
+
 
     return (
         <Container>
@@ -30,19 +106,19 @@ const About = () => {
                 </FormTitle>
                 <Input
                     type="text"
-                    name="title"
+                    name="abouttitle"
                     placeholder="overskrift.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
-                    type="text"
-                    name="image"
+                    type="file"
+                    name="aboutimg"
                     placeholder="bilde.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="text"
+                    name="aboutdesc"
                     placeholder="innhold.."
                     onChange={(e) => handleChange(e)}
                 />
@@ -50,7 +126,7 @@ const About = () => {
                     backgroundcolor="#3E768C"
                     color="white"
                     hover="#558ba0"
-                    onClick={(e) => handleClick(e)}
+                    onClick={(e) => handleUpdateAboutContent(e)}
                 >
                     Send
                 </Button>{" "}

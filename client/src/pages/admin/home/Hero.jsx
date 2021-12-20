@@ -2,6 +2,13 @@ import { useState , useEffect} from "react";
 import styled from "styled-components";
 import {updateContent, getContent} from "../../../redux/apiCalls"
 import { useDispatch, useSelector } from "react-redux";
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+} from "firebase/storage";
+import app from "../../../firebase";
 
 const Hero = () => {
     const content = useSelector(state => state.content.contents);
@@ -25,24 +32,68 @@ const Hero = () => {
 
     const dispatch = useDispatch(); 
 
-    //Get input values
-    const handleChange = (e) => {
-        e.persist();
-        let value = e.target.value;
-        setUserInput({ ...userInput, [e.target.name]: value });
-    };
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        updateContent( contents[0]._id, userInput, dispatch);
-     
-    };
-
-
-
     useEffect(() => {
         getContent(dispatch);
     }, [dispatch]);
+
+        //Get input values
+        const handleChange = (e) => {
+            e.persist();
+            let value = e.target.value;
+            let name = e.target.name;
+
+            switch (name) {
+                case "heroimg":
+                    setUserInput({ ...userInput, [name]: e.target.files[0] });
+                    break;
+                default:
+                    setUserInput({ ...userInput, [name]: value });
+            }
+        };
+
+
+    const handleUpdateHeroContent = (e) => {
+        e.preventDefault();
+        console.log(userInput);
+        // addProduct(userInput, dispatch)
+        const fileName = new Date().getTime() + userInput.heroimg.name;
+        const storage = getStorage(app);
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, userInput.heroimg);
+
+        //https://firebase.google.com/docs/storage/web/upload-files
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                    case "paused":
+                        console.log("Upload is paused");
+                        break;
+                    case "running":
+                        console.log("Upload is running");
+                        break;
+                    default:
+                }
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    const product = { ...userInput, heroimg: downloadURL };
+                    console.log(product);
+                    updateContent(contents[0]._id ,product, dispatch);
+                });
+            }
+        );
+    };
 
 
     return (
@@ -59,8 +110,8 @@ const Hero = () => {
                     placeholder="overskrift.."
                     onChange={(e) => handleChange(e)}
                 />
-                <Input
-                    type="text"
+                      <Input
+                    type="file"
                     name="heroimg"
                     placeholder="bilde.."
                     onChange={(e) => handleChange(e)}
@@ -69,7 +120,7 @@ const Hero = () => {
                     backgroundcolor="#3E768C"
                     color="white"
                     hover="#558ba0"
-                    onClick={(e) => handleClick(e)}
+                    onClick={(e) => handleUpdateHeroContent(e)}
                 >
                     Send
                 </Button>{" "}

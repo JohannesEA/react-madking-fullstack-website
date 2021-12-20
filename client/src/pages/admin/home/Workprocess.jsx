@@ -1,27 +1,49 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import styled from "styled-components";
+import {updateContent, getContent} from "../../../redux/apiCalls"
+import { useDispatch, useSelector } from "react-redux";
+
 
 const WorkProcess = () => {
+    const content = useSelector(state => state.content.contents);
+
+    const size = content.length;
+    const contents = content.slice(0, size);
+
     const [userInput, setUserInput] = useState({
-        title: "",
-        subTitle: "",
-        text1: "",
-        text2: "",
-        text3: "",
-        text4: "",
+        herotitle: contents[0].herotitle,
+        heroimg: contents[0].heroimg,
+        abouttitle:  contents[0].abouttitle,
+        aboutdesc:  contents[0].aboutdesc,
+        aboutimg: contents[0].aboutimg,
+        workprocestitle: "",
+        workprocessone: "",
+        workprocesstwo: "",
+        workprocessthree: "",
+        workprocessfour: "",
+        beatstitle: ""
     });
 
-    //Get input values
-    const handleChange = (e) => {
-        e.persist();
-        let value = e.target.value;
-        setUserInput({ ...userInput, [e.target.name]: value });
+    const dispatch = useDispatch(); 
+
+    useEffect(() => {
+        getContent(dispatch);
+    }, [dispatch]);
+
+        //Get input values
+        const handleChange = (e) => {
+            e.persist();
+            let value = e.target.value;
+            let name = e.target.name;
+            setUserInput({ ...userInput, [name]: value });
+        };
+
+
+    const handleUpdateWorkProcessContent = (e) => {
+        e.preventDefault();
+        updateContent(contents[0]._id ,userInput, dispatch);
     };
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        console.log(userInput);
-    };
 
     return (
         <Container>
@@ -34,45 +56,46 @@ const WorkProcess = () => {
                 </FormTitle>
                 <Input
                     type="text"
-                    name="title"
+                    name="workprocestitle"
                     placeholder="overskrift.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="text1"
+                    name="workprocessone"
                     placeholder="tekst 1.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="text2"
+                    name="workprocesstwo"
                     placeholder="tekst 2.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="text3"
+                    name="workprocessthree"
                     placeholder="tekst 3.."
                     onChange={(e) => handleChange(e)}
                 />
                 <Input
                     type="text"
-                    name="text4"
+                    name="workprocessfour"
                     placeholder="tekst 4.."
                     onChange={(e) => handleChange(e)}
                 />
-                <Input
+                         <Input
                     type="text"
-                    name="image"
-                    placeholder="undertekst.."
+                    name="beatstitle"
+                    placeholder="Tittel for våre beats seksjon."
                     onChange={(e) => handleChange(e)}
                 />
+      
                 <Button
                     backgroundcolor="#3E768C"
                     color="white"
                     hover="#558ba0"
-                    onClick={(e) => handleClick(e)}
+                    onClick={(e) => handleUpdateWorkProcessContent(e)}
                 >
                     Send
                 </Button>{" "}

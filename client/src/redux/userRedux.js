@@ -12,6 +12,7 @@ const userSlice = createSlice({
             state.isFetching = true;
         },
         loginSuccess: (state, action) => {
+            localStorage.setItem("isAuthenticated", true);
             state.isFetching = false;
             state.currentUser = action.payload;
         },
@@ -20,6 +21,7 @@ const userSlice = createSlice({
             state.error = true;
         },
         logout: (state) => {
+            localStorage.setItem("isAuthenticated", false);
             state.isFetching = false;
             state.currentUser = null;
         },

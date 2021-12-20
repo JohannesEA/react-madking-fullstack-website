@@ -32,9 +32,11 @@ export const login = async (dispatch, user) => {
         console.log(user);
         const res = await publicRequest.post("api/auth/login", user);
         dispatch(loginSuccess(res.data));
+
     } catch (err) {
         dispatch(loginFailure());
         console.log("Login Failed!", err);
+
     }
 };
 export const getProducts = async dispatch => {
@@ -100,7 +102,9 @@ export const updateContent = async (id, content, dispatch) => {
     dispatch(updateContentStart());
     try {
         // update
-        dispatch(updateContentSuccess({ id, content }));
+        const res = await userRequest.put(`api/contents/${id}`, content);
+        console.log(res.data)
+        dispatch(updateContentSuccess({ id, content}));
     } catch (err) {
         dispatch(updateContentFailure());
     }

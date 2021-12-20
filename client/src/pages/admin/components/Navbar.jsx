@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Squash as Hamburger } from "hamburger-react";
 import useWindowDimensions from "../../../reusableFunctions/Functions";
-import { Link as DomLink } from "react-router-dom";
+import { Link as DomLink, Redirect, Route } from "react-router-dom";
 import { logout } from "../../../redux/userRedux";
 import { useDispatch } from "react-redux";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { width } = useWindowDimensions();
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    console.log("Bruker er logget inn ", isAuthenticated)
 
     const dispatch = useDispatch();
 
@@ -34,8 +37,7 @@ const Navbar = () => {
                     {" "}
                     <MenuLink href="">Hjem</MenuLink>
                 </DomLink>
-
-                <DomLink to="/producthandler">
+                <DomLink  to="/producthandler">
                     {" "}
                     <MenuLink href="">Produkter</MenuLink>
                 </DomLink>

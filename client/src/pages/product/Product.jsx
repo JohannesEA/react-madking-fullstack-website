@@ -6,6 +6,10 @@ import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
 import audio from "../../mixaund-inspiring-happy-morning.mp3"
+import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
+const audiotoplay = new Audio(audio);
+
+
 
 const Product = ({ item }) => {
     const { width } = useWindowDimensions();
@@ -14,12 +18,17 @@ const Product = ({ item }) => {
     const id = location.pathname.split("/")[2];
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     console.log("ID: ", id);
 
     useEffect(() => {
         getProducts(dispatch);
     }, [dispatch]);
+
+    useEffect(() => {
+        isPlaying ? audiotoplay.play() : audiotoplay.pause();
+    }, [isPlaying]);
 
     useEffect(() => {
         const getProduct = () => {
@@ -38,10 +47,7 @@ const Product = ({ item }) => {
         dispatch(addProduct({ ...product }));
     };
 
-    let audiotoplay = new Audio(audio);
-    const handlePlaySong = () => {
-        audiotoplay.play();
-    }
+
     return (
         <Container>
             <ImageContainer>
@@ -61,14 +67,8 @@ const Product = ({ item }) => {
                     >
                         Legg Til I Handlekurv
                     </Button>
-                    <Button
-                        backgroundcolor="#3E768C"
-                        color="white"
-                        hover="#558ba0"
-                        onClick={handlePlaySong}
-                    >
-                        Spill Av
-                    </Button>
+                    {!isPlaying ? <AiOutlinePlayCircle color="black" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="black" fontSize={50} onClick={() => setIsPlaying(false)} />}
+
                 </Buttons>
             </ProductInformationContainer>
         </Container>
