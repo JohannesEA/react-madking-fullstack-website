@@ -181,8 +181,12 @@ const Buttons = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 15em;
+    width: 80%;
     margin: 0 auto;
+
+    @media (max-width: 400px) {
+        width: 100%;
+    }
 `;
 
 const Button = styled.button`
