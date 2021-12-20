@@ -13,7 +13,6 @@ import audio from "../../mixaund-inspiring-happy-morning.mp3";
 import { useRef } from "react";
 const audiotoplay = new Audio(audio);
 
-
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products);
@@ -29,17 +28,17 @@ const MusicCarouselle = () => {
         navigate(path);
     };
 
-    const handlePlaySong = (prod) => {
+    const handlePlaySong = prod => {
         setSelectedProd(prod);
         if (isPlaying) {
             audiotoplay.pause();
             setIsPlaying(false);
-        }else{
+        } else {
             audiotoplay.play();
             setIsPlaying(true);
         }
         console.log("Selected prod: ", selectedProd);
-    }
+    };
 
     // useEffect(() => {
     //     isPlaying ? audiotoplay.play() : audiotoplay.pause();
@@ -68,7 +67,7 @@ const MusicCarouselle = () => {
         slidesToShow: width > 800 ? 3 : 1,
         speed: 500,
         arrows: false,
-        lazyLoad: true,
+        lazyLoad: true
     };
 
     return (
@@ -94,9 +93,20 @@ const MusicCarouselle = () => {
                                 >
                                     Velg
                                 </Button>
-                                
-                                    {isPlaying && prod._id === selectedProd._id ?   <AiOutlinePauseCircle color="white" fontSize={50} onClick={() => handlePlaySong(prod)} /> : <AiOutlinePlayCircle color="white" fontSize={50} onClick={() => handlePlaySong(prod)}/>}
-                            
+
+                                {isPlaying && prod._id === selectedProd._id ? (
+                                    <AiOutlinePauseCircle
+                                        color="white"
+                                        fontSize={50}
+                                        onClick={() => handlePlaySong(prod)}
+                                    />
+                                ) : (
+                                    <AiOutlinePlayCircle
+                                        color="white"
+                                        fontSize={50}
+                                        onClick={() => handlePlaySong(prod)}
+                                    />
+                                )}
                             </Buttons>
                         </SliderItem>
                     ))}
