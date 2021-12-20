@@ -17,6 +17,7 @@ import AdminProductpage from "./pages/admin/products/AdminProductPage";
 
 const App = () => {
     const user = useSelector((state) => state.user.currentUser);
+    console.log(user);
 
     return (
         <Router>

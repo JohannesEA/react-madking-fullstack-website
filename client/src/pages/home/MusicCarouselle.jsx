@@ -18,8 +18,8 @@ const MusicCarouselle = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.product.products);
     const content = useSelector(state => state.content.contents);
+    const [selectedProd, setSelectedProd] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
-    const playButtonColor = "white";
     const { height, width } = useWindowDimensions();
     let path = "";
     const navigate = useNavigate();
@@ -28,9 +28,21 @@ const MusicCarouselle = () => {
         path = "/products/" + item._id;
         navigate(path);
     };
-    useEffect(() => {
-        isPlaying ? audiotoplay.play() : audiotoplay.pause();
-    }, [isPlaying]);
+
+    const handlePlaySong = (prod) => {
+        setSelectedProd(prod);
+        if (isPlaying) {
+            audiotoplay.pause();
+            setIsPlaying(false);
+        }else{
+            audiotoplay.play();
+            setIsPlaying(true);
+        }
+        console.log("Selected prod: ", selectedProd);
+    }
+    // useEffect(() => {
+    //     isPlaying ? audiotoplay.play() : audiotoplay.pause();
+    // }, [isPlaying]);
 
     useEffect(() => {
         getProducts(dispatch);
@@ -51,9 +63,11 @@ const MusicCarouselle = () => {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
+        centerPadding: "50px",
         slidesToShow: width > 800 ? 3 : 1,
-        speed: 500
+        speed: 500,
+        arrows: false,
+        lazyLoad: true,
     };
 
     return (
@@ -79,9 +93,8 @@ const MusicCarouselle = () => {
                                 >
                                     Velg
                                 </Button>
-
-                         
-                                    {!isPlaying ? <AiOutlinePlayCircle color="white" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="white" fontSize={50} onClick={() => setIsPlaying(false)} />}
+                                
+                                    {isPlaying && prod._id === selectedProd._id ?   <AiOutlinePauseCircle color="white" fontSize={50} onClick={() => handlePlaySong(prod)} /> : <AiOutlinePlayCircle color="white" fontSize={50} onClick={() => handlePlaySong(prod)}/>}
                             
                             </Buttons>
                         </SliderItem>
