@@ -159,6 +159,8 @@ const Buttons = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    
 `;
 
 const Button = styled.button`

@@ -57,20 +57,22 @@ const Products = ({ item }) => {
                             >
                                 Velg
                             </Button>
-                
+
                             {isPlaying && prod._id === selectedProd._id ? (
-                                    <AiOutlinePauseCircle
-                                        color="black"
-                                        fontSize={50}
-                                        onClick={() => handlePlaySong(prod)}
-                                    />
-                                ) : (
-                                    <AiOutlinePlayCircle
-                                        color="black"
-                                        fontSize={50}
-                                        onClick={() => handlePlaySong(prod)}
-                                    />
-                                )}
+                                <AiOutlinePauseCircle
+                                    className="ai-outline-pause"
+                                    color="black"
+                                    fontSize={50}
+                                    onClick={() => handlePlaySong(prod)}
+                                />
+                            ) : (
+                                <AiOutlinePlayCircle
+                                    className="ai-outline-play"
+                                    color="black"
+                                    fontSize={50}
+                                    onClick={() => handlePlaySong(prod)}
+                                />
+                            )}
                         </Buttons>
                     </ProductContainer>
                 ))}
@@ -107,7 +109,8 @@ const ProductListContainer = styled.div`
 const ProductContainer = styled.div`
     border-radius: 1em;
     justify-content: center;
-    margin: 1em;
+    margin: 0.5em;
+
     height: auto;
     min-height: 65vh;
     align-items: center;
@@ -167,15 +170,11 @@ const Buttons = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-width: 80%;
+    width: 80%;
     margin: 0 auto;
 
-    @media (max-width: 800px) {
-        max-width: 12em;
-    }
-
-    @media (max-width: 400px) {
-        max-width: 10em;
+    @media (max-width: 500px) {
+        width: 100%;
     }
 `;
 const Button = styled.button`
