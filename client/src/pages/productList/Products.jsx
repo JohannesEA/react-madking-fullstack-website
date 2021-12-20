@@ -8,20 +8,27 @@ import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import audio from "../../mixaund-inspiring-happy-morning.mp3";
 const audiotoplay = new Audio(audio);
 
-
 const Products = ({ item }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [selectedProd, setSelectedProd] = useState({});
 
     useEffect(() => {
         getProducts(dispatch);
     }, [dispatch]);
 
-    useEffect(() => {
-        isPlaying ? audiotoplay.play() : audiotoplay.pause();
-    }, [isPlaying]);
+    const handlePlaySong = (prod) => {
+        setSelectedProd(prod);
+        if (isPlaying) {
+            audiotoplay.pause();
+            setIsPlaying(false);
+        } else {
+            audiotoplay.play();
+            setIsPlaying(true);
+        }
+    };
 
     let path = "";
     const handleClick = (item) => {
@@ -50,7 +57,20 @@ const Products = ({ item }) => {
                             >
                                 Velg
                             </Button>
-                            {!isPlaying ? <AiOutlinePlayCircle color="black" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="black" fontSize={50} onClick={() => setIsPlaying(false)} />}
+                
+                            {isPlaying && prod._id === selectedProd._id ? (
+                                    <AiOutlinePauseCircle
+                                        color="black"
+                                        fontSize={50}
+                                        onClick={() => handlePlaySong(prod)}
+                                    />
+                                ) : (
+                                    <AiOutlinePlayCircle
+                                        color="black"
+                                        fontSize={50}
+                                        onClick={() => handlePlaySong(prod)}
+                                    />
+                                )}
                         </Buttons>
                     </ProductContainer>
                 ))}
@@ -63,7 +83,7 @@ export default Products;
 
 const Container = styled.div`
     text-align: center;
-    background-color:white;
+    background-color: white;
 
     @media (max-width: 800px) {
         flex-direction: column;
@@ -113,7 +133,6 @@ const ImageContainer = styled.div`
 
     @media (max-width: 500px) {
         height: 20vh;
-
     }
 `;
 
@@ -179,6 +198,5 @@ const Button = styled.button`
     @media (max-width: 500px) {
         height: auto;
         padding: 10px 14px;
-
     }
 `;

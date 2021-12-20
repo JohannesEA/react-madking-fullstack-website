@@ -40,6 +40,7 @@ const MusicCarouselle = () => {
         }
         console.log("Selected prod: ", selectedProd);
     }
+
     // useEffect(() => {
     //     isPlaying ? audiotoplay.play() : audiotoplay.pause();
     // }, [isPlaying]);

@@ -5,11 +5,9 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
-import audio from "../../mixaund-inspiring-happy-morning.mp3"
+import audio from "../../mixaund-inspiring-happy-morning.mp3";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 const audiotoplay = new Audio(audio);
-
-
 
 const Product = ({ item }) => {
     const { width } = useWindowDimensions();
@@ -26,9 +24,15 @@ const Product = ({ item }) => {
         getProducts(dispatch);
     }, [dispatch]);
 
-    useEffect(() => {
-        isPlaying ? audiotoplay.play() : audiotoplay.pause();
-    }, [isPlaying]);
+    const handlePlaySong = (prod) => {
+        if (isPlaying) {
+            audiotoplay.pause();
+            setIsPlaying(false);
+        } else {
+            audiotoplay.play();
+            setIsPlaying(true);
+        }
+    };
 
     useEffect(() => {
         const getProduct = () => {
@@ -46,7 +50,6 @@ const Product = ({ item }) => {
     const handleClick = () => {
         dispatch(addProduct({ ...product }));
     };
-
 
     return (
         <Container>
@@ -67,8 +70,19 @@ const Product = ({ item }) => {
                     >
                         Legg Til I Handlekurv
                     </Button>
-                    {!isPlaying ? <AiOutlinePlayCircle color="black" fontSize={50} onClick={() => setIsPlaying(true)}/> : <AiOutlinePauseCircle color="black" fontSize={50} onClick={() => setIsPlaying(false)} />}
-
+                    {!isPlaying ? (
+                        <AiOutlinePlayCircle
+                            color="black"
+                            fontSize={50}
+                            onClick={() => handlePlaySong(product)}
+                        />
+                    ) : (
+                        <AiOutlinePauseCircle
+                            color="black"
+                            fontSize={50}
+                            onClick={() => handlePlaySong(product)}
+                        />
+                    )}
                 </Buttons>
             </ProductInformationContainer>
         </Container>
@@ -107,11 +121,9 @@ const ImageContainer = styled.div`
     border-radius: 1em;
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
 
-
     &:hover {
-        box-shadow: -1px 0px 37px -1px rgba(0,0,0,0.75);
+        box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
     }
-
 `;
 
 const Image = styled.img`
