@@ -9,9 +9,7 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import audio from "../../mixaund-inspiring-happy-morning.mp3";
 import { useRef } from "react";
-const audiotoplay = new Audio(audio);
 
 const MusicCarouselle = () => {
     const dispatch = useDispatch();
@@ -20,6 +18,9 @@ const MusicCarouselle = () => {
     const [selectedProd, setSelectedProd] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
     const { height, width } = useWindowDimensions();
+    const [url, setUrl] = useState();
+    const [audio, setAudio] = useState(new Audio(url));
+
     let path = "";
     const navigate = useNavigate();
 
@@ -30,19 +31,17 @@ const MusicCarouselle = () => {
 
     const handlePlaySong = prod => {
         setSelectedProd(prod);
+        setAudio(prod.mp3)
+        console.log("File to play: ",prod.mp3);
         if (isPlaying) {
-            audiotoplay.pause();
+            audio.pause();
             setIsPlaying(false);
         } else {
-            audiotoplay.play();
+            audio.play();
             setIsPlaying(true);
         }
         console.log("Selected prod: ", selectedProd);
     };
-
-    // useEffect(() => {
-    //     isPlaying ? audiotoplay.play() : audiotoplay.pause();
-    // }, [isPlaying]);
 
     useEffect(() => {
         getProducts(dispatch);
