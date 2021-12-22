@@ -5,8 +5,7 @@ import { BsPlayBtn } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
-import audio from "../../mixaund-inspiring-happy-morning.mp3";
-const audiotoplay = new Audio(audio);
+
 
 const Products = ({ item }) => {
     const navigate = useNavigate();
