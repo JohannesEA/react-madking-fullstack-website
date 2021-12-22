@@ -14,6 +14,8 @@ const Products = ({ item }) => {
     const products = useSelector((state) => state.product.products);
     const [isPlaying, setIsPlaying] = useState(false);
     const [selectedProd, setSelectedProd] = useState({});
+    const [url, setUrl] = useState();
+    const [audio, setAudio] = useState(new Audio(url));
 
     useEffect(() => {
         getProducts(dispatch);
@@ -21,11 +23,12 @@ const Products = ({ item }) => {
 
     const handlePlaySong = (prod) => {
         setSelectedProd(prod);
+        setAudio(prod.mp3)
         if (isPlaying) {
-            audiotoplay.pause();
+            audio.pause();
             setIsPlaying(false);
         } else {
-            audiotoplay.play();
+            audio.play();
             setIsPlaying(true);
         }
     };

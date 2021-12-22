@@ -17,6 +17,8 @@ const Product = ({ item }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [url, setUrl] = useState();
+    const [audio, setAudio] = useState(new Audio(url));
 
     console.log("ID: ", id);
 
@@ -25,11 +27,12 @@ const Product = ({ item }) => {
     }, [dispatch]);
 
     const handlePlaySong = (prod) => {
+        setAudio(product.mp3)
         if (isPlaying) {
-            audiotoplay.pause();
+            audio.pause();
             setIsPlaying(false);
         } else {
-            audiotoplay.play();
+            audio.play();
             setIsPlaying(true);
         }
     };
