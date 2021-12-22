@@ -31,7 +31,7 @@ const MusicCarouselle = () => {
 
     const handlePlaySong = prod => {
         setSelectedProd(prod);
-        setAudio(prod.mp3)
+        setUrl(prod.mp3)
         console.log("File to play: ",prod.mp3);
         if (isPlaying) {
             audio.pause();

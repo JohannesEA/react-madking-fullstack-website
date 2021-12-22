@@ -23,7 +23,7 @@ const Products = ({ item }) => {
 
     const handlePlaySong = (prod) => {
         setSelectedProd(prod);
-        setAudio(prod.mp3)
+        setUrl(prod.mp3)
         if (isPlaying) {
             audio.pause();
             setIsPlaying(false);

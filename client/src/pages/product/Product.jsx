@@ -5,7 +5,6 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
-import audio from "../../mixaund-inspiring-happy-morning.mp3";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 const audiotoplay = new Audio(audio);
 
