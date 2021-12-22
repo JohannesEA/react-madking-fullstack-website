@@ -22,6 +22,7 @@ const ProductHandler = () => {
         description: "",
         categories: [],
         price: 0,
+        mp3: "",
     });
     const [productToEditId, setProductToEditId] = useState();
     const dispatch = useDispatch();
@@ -48,16 +49,14 @@ const ProductHandler = () => {
         }
     };
 
-    const handleAddNewProduct = (e) => {
+
+    const handleMp3Upload = (e) => {
         e.preventDefault();
-        console.log(userInput);
-        // addProduct(userInput, dispatch)
-        const fileName = new Date().getTime() + userInput.img.name;
+        const fileName = new Date().getTime() + e.target.files[0].name;
         const storage = getStorage(app);
         const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, userInput.img);
+        const uploadTask = uploadBytesResumable(storageRef,  e.target.files[0]);
 
-        //https://firebase.google.com/docs/storage/web/upload-files
         uploadTask.on(
             "state_changed",
             (snapshot) => {
@@ -83,12 +82,56 @@ const ProductHandler = () => {
                 // Handle successful uploads on complete
                 // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    const product = { ...userInput, img: downloadURL };
-                    console.log(product);
-                    addProduct(product, dispatch);
+                    setUserInput({ ...userInput, mp3: downloadURL });
                 });
             }
         );
+
+    } 
+
+    const handleImageUpload = (e) => {
+        e.preventDefault();
+        const fileName = new Date().getTime() + e.target.files[0].name;
+        const storage = getStorage(app);
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef,  e.target.files[0]);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("Upload is " + progress + "% done");
+                switch (snapshot.state) {
+                    case "paused":
+                        console.log("Upload is paused");
+                        break;
+                    case "running":
+                        console.log("Upload is running");
+                        break;
+                    default:
+                }
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setUserInput({ ...userInput, img: downloadURL });
+                });
+            }
+        );
+
+    } 
+
+    const handleAddNewProduct = (e) => {
+        e.preventDefault();
+        console.log("Product: ",userInput);
+        addProduct(userInput, dispatch);
     };
 
     const handleDelete = (prod) => {
@@ -121,7 +164,7 @@ const ProductHandler = () => {
                     type="file"
                     name="img"
                     placeholder="bilde.."
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleImageUpload(e)}
                 />
                 <Input
                     type="text"
@@ -140,6 +183,12 @@ const ProductHandler = () => {
                     name="price"
                     placeholder="pris.."
                     onChange={(e) => handleChange(e)}
+                />
+                     <Input
+                    type="file"
+                    name="mp3"
+                    placeholder="mp3.."
+                    onChange={(e) => handleMp3Upload(e)}
                 />
                 <Button
                     backgroundcolor="#3E768C"
