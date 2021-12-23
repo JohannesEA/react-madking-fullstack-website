@@ -153,12 +153,12 @@ const Image = styled.img`
     border-radius: 1em;
 
     @media (max-width: 800px) {
-        max-height: 50vh;
-        max-width: 40vh;
+        max-height: 60vh;
+        max-width: 50vh;
     }
 
     @media (max-width: 400px) {
-        max-height: 40vh;
-        max-width: 30vh;
+        min-width: 15em;
+        max-height: 20em;
     }
 `;
