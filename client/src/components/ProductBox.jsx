@@ -140,24 +140,44 @@ const Container = styled.div`
 `;
 
 const animationTwo = keyframes`
-  0% {
-    box-shadow: 1px 2px 25px -5px rgba(255, 161, 161, 0.75);
+0% {
+    box-shadow:  1px 2px 25px -5px rgba(255, 161, 161, 0.75);
   }
 
-  25% {
-    box-shadow: 1px 2px 25px -5px rgba(232, 170, 142, 0.75);
+  10% {
+    box-shadow: 1px 2px 25px -5px rgba(232, 186, 142, 0.75);
+  }
+
+  20% {
+    box-shadow: 1px 2px 25px -5px rgba(209, 252, 139, 0.75);
+  }
+
+  30% {
+    box-shadow: 1px 2px 25px -5px rgba(175, 243, 126, 0.75);
+  }
+  40% {
+    box-shadow: 1px 2px 25px -5px rgba(124, 250, 156, 0.75);
   }
 
   50% {
-    box-shadow: 1px 2px 25px -5px rgba(162, 235, 143, 0.75);
+    box-shadow: 1px 2px 25px -5px rgba(111, 245, 176, 0.75);
   }
 
-  75% {
-    box-shadow: 1px 2px 25px -5px rgba(224, 250, 162, 0.75);
+  60% {
+    box-shadow: 1px 2px 25px -5px rgba(121, 204, 248, 0.75);
+  }
+  70% {
+    box-shadow: 1px 2px 25px -5px rgba(121, 176, 248, 0.75);
+  }
+  80% {
+    box-shadow: 1px 2px 25px -5px rgba(117, 147, 243, 0.75);
+  }
+  90% {
+    box-shadow: 1px 2px 25px -5px rgba(187, 123, 252, 0.75);
   }
 
-  100% {
-    box-shadow: 1px 2px 25px -5px rgba(121, 250, 190, 0.75);
+100% {
+    box-shadow:  1px 2px 25px -5px rgba(255, 161, 161, 0.75);
   }
 `;
 
@@ -186,7 +206,7 @@ const rotate = keyframes`
 `;
 
 const Animation = styled.div`
-  animation: ${animation} 2s linear infinite, ${rotate} 2s linear infinite ;
+  animation: ${animation} 2s linear infinite, ${rotate} 5s linear infinite ;
   width: 50px;
   height: 50px;
   margin-top: 1em;

@@ -105,71 +105,43 @@ const animationTwo = keyframes`
     box-shadow: -1px 1px 51px 23px rgba(255, 161, 161, 0.75);
   }
 
-  25% {
-    box-shadow: -1px 1px 51px 23px rgba(232, 170, 142, 0.75);
-  }
-
-  50% {
-    box-shadow:-1px 1px 51px 23px rgba(162, 235, 143, 0.75);
-  }
-
-  75% {
-    box-shadow:-1px 1px 51px 23px rgba(224, 250, 162, 0.75);
-  }
-
-  100% {
-    box-shadow: -1px 1px 51px 23pxrgba(121, 250, 190, 0.75);
-  }
-`;
-
-const animationOne = keyframes`
   10% {
-    height: 50vh;
-    width: 40vh;  }
+    box-shadow: -1px 1px 51px 23px rgba(232, 186, 142, 0.75);
+  }
 
   20% {
-    height: 48vh;
-    width: 38vh;  }
+    box-shadow:-1px 1px 51px 23px rgba(209, 252, 139, 0.75);
+  }
 
   30% {
-    height: 46vh;
-    width: 36vh;  }
-
+    box-shadow:-1px 1px 51px 23px rgba(175, 243, 126, 0.75);
+  }
   40% {
-    height: 44vh;
-    width: 34vh;  }
+    box-shadow:-1px 1px 51px 23px rgba(124, 250, 156, 0.75);
+  }
 
   50% {
-    height: 42vh;
-    width: 32vh;  }
+    box-shadow:-1px 1px 51px 23px rgba(111, 245, 176, 0.75);
+  }
 
   60% {
-    height: 42vh;
-    width: 32vh;  }
-
+    box-shadow:-1px 1px 51px 23px rgba(121, 204, 248, 0.75);
+  }
   70% {
-    height: 44vh;
-    width: 34vh;  }
-
+    box-shadow:-1px 1px 51px 23px rgba(121, 176, 248, 0.75);
+  }
   80% {
-    height: 46vh;
-    width: 36vh;  }
-
+    box-shadow:-1px 1px 51px 23px rgba(117, 147, 243, 0.75);
+  }
   90% {
-    height: 48vh;
-    width: 38vh;  }
+    box-shadow:-1px 1px 51px 23px rgba(187, 123, 252, 0.75);
+  }
 
-  100% {
-    height: 50vh;
-    width: 40vh;  }
+100% {
+    box-shadow: -1px 1px 51px 23pxrgba(255, 161, 161, 0.75);
+  }
 `;
 
-
-const rotate = keyframes`
-    100% {
-      transform: rotate(360deg);
-    }
-`;
 
 const Container = styled.div`
     display: flex;
@@ -200,7 +172,7 @@ const ImageContainer = styled.div`
     text-align: center;
     border-radius: 1em;
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
-    animation: ${(prop) => (prop.isActive ? animationTwo : null)} 4s linear infinite, ${(prop) => (prop.isActive ? animationOne : null)} 2s linear infinite, ${(prop) => (prop.isActive ? rotate : null)} 5s linear infinite;
+    animation: ${(prop) => (prop.isActive ? animationTwo : null)} 4s linear infinite;
 
     &:hover {
         box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
