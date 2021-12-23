@@ -124,6 +124,8 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    width: 40%;
+    min-width: 13em;
 `;
 
 

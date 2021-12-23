@@ -15,3 +15,14 @@ body {
   .ai-outline-play:hover{
     color:  "red";
   }
+
+  .slick-dots li button:before {
+    color: white;
+    font-size: .5rem;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: #B0CDD9 !important;
+    font-size: .7rem;
+
+}

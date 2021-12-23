@@ -15,6 +15,9 @@ const Button = ({
     const BACKGROUND_COLOR_TWO = "#f3f3f3";
     const COLOR_TWO = "BLACK";
     const HOVERCOLOR_TWO = "#FFF";
+    const BACKGROUND_COLOR_THREE = "red";
+    const COLOR_THREE = "white";
+    const HOVERCOLOR_THREE  = "#ff7b7b";
 
     useEffect(() => {
         const handleColor = () => {
@@ -27,6 +30,11 @@ const Button = ({
                 setBACKGROUNDCOLOR(BACKGROUND_COLOR_TWO);
                 setCOLOR(COLOR_TWO);
                 setHOVERCOLOR(HOVERCOLOR_TWO);
+            }
+            else{
+                setBACKGROUNDCOLOR(BACKGROUND_COLOR_THREE);
+                setCOLOR(COLOR_THREE);
+                setHOVERCOLOR(HOVERCOLOR_THREE);
             }
         };
 

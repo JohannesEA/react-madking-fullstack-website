@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../../components/Button"
 
 const KEY =
     "pk_test_51JwS4BDJ6KD8X4jUYGm2VeyofI9YOdonXbCHy3GB12JGM3gPHdY7l3qi9cd7fAvMsTtmiZdu0sjZWy20SxAghpui007JvXEC6j";
@@ -94,21 +95,26 @@ stripeToken && makeRequest();
                     >
                         {" "}
                         <Button
-                            backgroundcolor="#3E768C"
-                            color="white"
-                            hover="#558ba0"
+                         text={"Sjekk Ut"}
+                         bc="color-2"
                         >
-                            Sjekk Ut
                         </Button>
+        
                     </StripeCheckout>
                     <Button
+                         text={"Tilbakestill"}
+                         bc="color-3"
+                         btnOnClick={handleResetCart}
+                        >
+                        </Button>
+                    {/* <Button
                         backgroundcolor="red"
                         color="white"
                         hover="#ff7b7b"
                         onClick={() => handleResetCart()}
                     >
                         Tilbakestill
-                    </Button>
+                    </Button> */}
                 </Buttons>
             </OrderContainer>
         </Container>
@@ -220,27 +226,29 @@ const DeleteArea = styled.div`
 const Buttons = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: row;
+    width: 100%;
+    min-width: 12em;
 `;
 
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
+// const Button = styled.button`
+//     padding: 14px 18px;
+//     transition: all 0.2s ease;
+//     font-weight: 600;
+//     cursor: pointer;
+//     border: none;
+//     border-radius: 1.5em;
+//     margin: 0 5px;
+//     background-color: ${(props) => props.backgroundcolor};
+//     color: ${(props) => props.color};
 
-    &:hover {
-        background-color: ${(props) => props.hover};
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
-`;
+//     &:hover {
+//         background-color: ${(props) => props.hover};
+//         border-radius: 0.5em;
+//         box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
+//     }
+// `;
 
 const OrderSummary = styled.div``;
 
