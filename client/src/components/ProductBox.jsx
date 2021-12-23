@@ -1,30 +1,44 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState, useRef } from "react";
 import Button from "./Button";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import styled, { keyframes } from "styled-components"
 
-const ProductBox = ({ item, backgroundcolor, btntext, onClickFunction }) => {
+
+const ProductBox = ({
+    item,
+    backgroundcolor,
+    btntext,
+    onClickFunction,
+}) => {
     const [selectedProd, setSelectedProd] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
-    const audio = new Audio(item.mp3);
     let path = "";
     const navigate = useNavigate();
+    const [isActive, setIsActive] = useState(false);
+
+
 
     const handleClick = (item) => {
         path = "/products/" + item._id;
         navigate(path);
     };
+
+    const audioPlayer = useRef();
+
     const handlePlayPauseSong = () => {
         setSelectedProd(item);
-        console.log("File to play: ", item.mp3);
         if (isPlaying) {
-            audio.pause();
-            audio.currentTime = 0;
+            audioPlayer.current.pause();
+            audioPlayer.current.currentTime = 0;
             setIsPlaying(false);
+            setIsActive(false);
+
         } else {
-            audio.play();
+            audioPlayer.current.play();
             setIsPlaying(true);
+            setIsActive(true);
+
         }
     };
 
@@ -58,12 +72,17 @@ const ProductBox = ({ item, backgroundcolor, btntext, onClickFunction }) => {
             backgroundcolor={BACKGROUND_COLOR}
             hover={HOVER_COLOR}
             color={COLOR}
+            isActive={isActive}
         >
+                  <audio ref={audioPlayer} src={item.mp3} preload="metadata"></audio>
+
             <Top>
                 <Image src={item.img} alt={item.title} />
             </Top>
 
             <Bottom>
+            {/* {isActive && <Animation>{audioPlayer.current.currentTime}</Animation>} */}
+
                 <Title>{item.title}</Title>
                 {/* <Description>{item.description}</Description> */}
                 <Price>{item.price} KR</Price>
@@ -107,11 +126,11 @@ const Container = styled.div`
     margin: 0.5em;
     transition: all 0.3s ease;
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+    animation: ${(prop) => prop.isActive ? animationTwo : null} 1s linear infinite;
 
     &:hover {
         background-color: ${(prop) => prop.hover};
         box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
-
     }
 
     @media (max-width: 400px) {
@@ -119,23 +138,80 @@ const Container = styled.div`
         max-height: 20em;
     }
 `;
-const Top = styled.div`
-height: 20em;
-width: 100%;
 
+const animationTwo = keyframes`
+  0% {
+    box-shadow: 1px 2px 25px -5px rgba(255, 161, 161, 0.75);
+  }
+
+  25% {
+    box-shadow: 1px 2px 25px -5px rgba(232, 170, 142, 0.75);
+  }
+
+  50% {
+    box-shadow: 1px 2px 25px -5px rgba(162, 235, 143, 0.75);
+  }
+
+  75% {
+    box-shadow: 1px 2px 25px -5px rgba(224, 250, 162, 0.75);
+  }
+
+  100% {
+    box-shadow: 1px 2px 25px -5px rgba(121, 250, 190, 0.75);
+  }
+`;
+
+const animation = keyframes`
+0%{
+    border: 1px solid black;
+}
+25%{
+    border: 1px solid orange;
+
+
+}
+50%{
+    border: 1px solid green;
+
+}
+100%{
+    border: 1px solid blue;
+
+}
+`;
+const rotate = keyframes`
+    100% {
+      transform: rotate(360deg);
+    }
+`;
+
+const Animation = styled.div`
+  animation: ${animation} 2s linear infinite, ${rotate} 2s linear infinite ;
+  width: 50px;
+  height: 50px;
+  margin-top: 1em;
+  
+  & .path {
+    stroke: #5652BF;
+    stroke-linecap: round;
+    animation: rotate 1.5s ease-in-out infinite;
+  }
+`;
+
+const Top = styled.div`
+    height: 20em;
+    width: 100%;
 `;
 
 const Image = styled.img`
-   height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
     border-radius: 1em 1em 0 0;
     transition: all 0.3s ease;
 
     @media (max-width: 400px) {
-       height: 9em;
+        height: 9em;
     }
-
-
 `;
 const Bottom = styled.div`
     flex: 1;

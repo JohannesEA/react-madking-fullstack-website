@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
@@ -20,13 +20,15 @@ const Product = ({ item }) => {
         getProducts(dispatch);
     }, [dispatch]);
 
-    const handlePlaySong = () => {
-        const audio = new Audio(product.mp3)
+    const audioPlayer = useRef();
+
+    const handlePlayPauseSong = () => {
         if (isPlaying) {
-            audio.pause();
+            audioPlayer.current.pause();
+            audioPlayer.current.currentTime = 0;
             setIsPlaying(false);
         } else {
-            audio.play();
+            audioPlayer.current.play();
             setIsPlaying(true);
         }
     };
@@ -46,16 +48,19 @@ const Product = ({ item }) => {
     const handleClick = () => {
         dispatch(addProduct({ ...product }));
         setProductAdded(true);
-        setConfirmationMessage("Beat lagt til i handlekurven")
-
+        setConfirmationMessage("Beat lagt til i handlekurven");
     };
 
     return (
         <Container>
-            <ImageContainer>
+            <ImageContainer isActive={isPlaying}>
                 <Image src={product.img} alt={product.title} />
             </ImageContainer>
-
+            <audio
+                ref={audioPlayer}
+                src={product.mp3}
+                preload="metadata"
+            ></audio>
             <ProductInformationContainer>
                 <Title color="black">{product.title}</Title>
                 <Desctiption>{product.description}</Desctiption>
@@ -73,23 +78,98 @@ const Product = ({ item }) => {
                         <AiOutlinePlayCircle
                             color="black"
                             fontSize={50}
-                            onClick={() => handlePlaySong()}
+                            onClick={() => handlePlayPauseSong()}
                         />
                     ) : (
                         <AiOutlinePauseCircle
                             color="black"
                             fontSize={50}
-                            onClick={() => handlePlaySong()}
+                            onClick={() => handlePlayPauseSong()}
                         />
                     )}
                 </Buttons>
-               { productAdded && <ConfirmationMessage>{confirmationMessage}</ConfirmationMessage>}
+                {productAdded && (
+                    <ConfirmationMessage>
+                        {confirmationMessage}
+                    </ConfirmationMessage>
+                )}
             </ProductInformationContainer>
         </Container>
     );
 };
 
 export default Product;
+
+const animationTwo = keyframes`
+  0% {
+    box-shadow: -1px 1px 51px 23px rgba(255, 161, 161, 0.75);
+  }
+
+  25% {
+    box-shadow: -1px 1px 51px 23px rgba(232, 170, 142, 0.75);
+  }
+
+  50% {
+    box-shadow:-1px 1px 51px 23px rgba(162, 235, 143, 0.75);
+  }
+
+  75% {
+    box-shadow:-1px 1px 51px 23px rgba(224, 250, 162, 0.75);
+  }
+
+  100% {
+    box-shadow: -1px 1px 51px 23pxrgba(121, 250, 190, 0.75);
+  }
+`;
+
+const animationOne = keyframes`
+  10% {
+    height: 50vh;
+    width: 40vh;  }
+
+  20% {
+    height: 48vh;
+    width: 38vh;  }
+
+  30% {
+    height: 46vh;
+    width: 36vh;  }
+
+  40% {
+    height: 44vh;
+    width: 34vh;  }
+
+  50% {
+    height: 42vh;
+    width: 32vh;  }
+
+  60% {
+    height: 42vh;
+    width: 32vh;  }
+
+  70% {
+    height: 44vh;
+    width: 34vh;  }
+
+  80% {
+    height: 46vh;
+    width: 36vh;  }
+
+  90% {
+    height: 48vh;
+    width: 38vh;  }
+
+  100% {
+    height: 50vh;
+    width: 40vh;  }
+`;
+
+
+const rotate = keyframes`
+    100% {
+      transform: rotate(360deg);
+    }
+`;
 
 const Container = styled.div`
     display: flex;
@@ -120,6 +200,7 @@ const ImageContainer = styled.div`
     text-align: center;
     border-radius: 1em;
     box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+    animation: ${(prop) => (prop.isActive ? animationTwo : null)} 4s linear infinite, ${(prop) => (prop.isActive ? animationOne : null)} 2s linear infinite, ${(prop) => (prop.isActive ? rotate : null)} 5s linear infinite;
 
     &:hover {
         box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
@@ -160,14 +241,11 @@ const ConfirmationMessage = styled.p`
     color: green;
 `;
 
-
 const Buttons = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    
 `;
 
 const Button = styled.button`
