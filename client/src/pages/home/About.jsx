@@ -24,7 +24,7 @@ const About = () => {
 
 
     return (
-        <Container id="about">
+        <Container id="about" >
             <Left>
             {contents.map(title => (<Title key={title._id + "mdksmk"}>{title.abouttitle}</Title>))}
                 {width > 800 && (
@@ -55,7 +55,7 @@ const About = () => {
 
             <Right>
                 <Image
-                    src="/assets/images/music-images/img5.jpg"
+                    src={contents[0].aboutimg}
                     alt="about-img"
                 />
                 {width < 800 && (

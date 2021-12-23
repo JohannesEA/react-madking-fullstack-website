@@ -254,6 +254,7 @@ export default ProductHandler;
 const Table = styled.table`
     margin-top: 3em;
     width: 80%;
+
 `;
 
 const TBody = styled.tbody``;
@@ -289,6 +290,7 @@ const Container = styled.div`
     justify-content: center;
     padding-top: 5em;
     flex-direction: column;
+    background-color:white;
 `;
 
 const Title = styled.h1`

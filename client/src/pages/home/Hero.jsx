@@ -20,7 +20,7 @@ const Hero = () => {
     
 
     return (
-        <Container id="hero">
+        <Container id="hero" img={contents[0].heroimg}>
             <Left>
                 {contents.map(title => (<Title key={title._id + "mdks22mk"}>{title.herotitle}</Title>))}
                 <ButtonContainer>
@@ -77,7 +77,7 @@ const Container = styled.div`
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    background: url("/assets/images/music-images/img4.jpg") no-repeat;
+    background: url(${props => props.img}) no-repeat;
     background-size: cover;
     background-position: 100%;
     left: 0;

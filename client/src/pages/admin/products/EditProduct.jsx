@@ -166,6 +166,8 @@ const Container = styled.div`
     justify-content: center;
     padding-top: 5em;
     flex-direction: column;
+    background-color:white;
+
 `;
 
 const Title = styled.h1`
