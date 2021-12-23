@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { getContent } from "../../redux/apiCalls";
+import Button from "../../components/Button";
 
 
 const Hero = () => {
@@ -33,11 +34,9 @@ const Hero = () => {
                     >
                         {" "}
                         <Button
-                            backgroundcolor="#3E768C"
-                            color="white"
-                            hover="#558ba0"
+                         text={"Om Oss"}
+                         bc="color-2"
                         >
-                            Om oss
                         </Button>
                     </Link>
                     <Link
@@ -50,11 +49,11 @@ const Hero = () => {
                     >
                         {" "}
                         <Button
-                            backgroundcolor="#cbd4d8"
-                            color="black"
-                            hover="#b7d8e6"
+                        text={"Våre Beats"}
+                        bc="color-1"
+
                         >
-                            Våre beats
+        
                         </Button>
                     </Link>
                 </ButtonContainer>
@@ -127,23 +126,6 @@ const ButtonContainer = styled.div`
     flex-direction: row;
 `;
 
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
-
-    &:hover {
-        background-color: ${(props) => props.hover};
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
-`;
 
 const Right = styled.div`
     flex: 1;
@@ -154,18 +136,3 @@ const Right = styled.div`
     text-align: center;
 `;
 
-// const Text = styled.p`
-//   color:  var(--color-5);
-//   font-weight: 400;
-//   font-size: 1.1rem;
-//   padding: 3rem 0;
-
-// `;
-
-// const Image = styled.image`
-//   color:  var(--color-5);
-//   font-weight: 400;
-//   font-size: 1.1rem;
-//   padding: 3rem 0;
-
-// `;

@@ -4,6 +4,7 @@ import useWindowDimensions from "../../reusableFunctions/Functions";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { getContent } from "../../redux/apiCalls";
+import Button from "../../components/Button";
 
 const ProcessOfWork = () => {
     const { width } = useWindowDimensions();
@@ -129,12 +130,12 @@ useEffect(() => {
                 >
                     {" "}
                     <Button
-                        backgroundcolor="#3E768C"
-                        color="white"
-                        hover="#558ba0"
-                    >
-                        Bestill Beat
-                    </Button>
+                        text={"Bestill Beat"}
+                        bc="color-2"
+
+                        >
+        
+                        </Button>
                 </Link>
             </Bottom>
         </Container>
@@ -235,23 +236,6 @@ const Bottom = styled.div`
     justify-content: center;
     flex-direction: column;
     text-align: center;
-`;
-
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
-    &:hover {
-        background-color: ${(props) => props.hover};
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
 `;
 
 const ProcessText = styled.p`

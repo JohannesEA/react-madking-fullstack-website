@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import Button from "../../components/Button";
 
 const Login = () => {
     const [username, setUsername] = useState({});
@@ -31,14 +32,10 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button
-                    backgroundcolor="#3E768C"
-                    color="white"
-                    hover="#558ba0"
-                    onClick={handleLogin}
-                    disabled={isFetching}
-                >
-                    Log Inn
-                </Button>{" "}
+                    text="Log Inn"
+                    bc="color-2"
+                    btnOnClick={handleLogin}
+                ></Button>{" "}
                 {error && <Error>Innlogging feilet..</Error>}
             </LoginContainer>
         </Container>
@@ -87,29 +84,6 @@ const Input = styled.input`
 
     @media (max-width: 800px) {
         padding: 1.5em;
-    }
-`;
-
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
-
-    &:hover {
-        background-color: ${(props) => props.hover};
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
-
-    &:disabled {
-        background-color: gray;
-        cursor: not-allowed;
     }
 `;
 

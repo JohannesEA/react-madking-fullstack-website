@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { validateRequestMessage } from "../../reusableFunctions/Validations";
-
+import Button from "../../components/Button";
 const Contact = () => {
     //Validation message states
     const [messageState, setMessageState] = useState({
@@ -98,12 +98,10 @@ const Contact = () => {
                 <ErrorMessage>{messageState.message}</ErrorMessage>
 
                 <Button
-                    onClick={(e) => {
-                        handleSendRequest(e);
-                    }}
-                >
-                    Send
-                </Button>
+                        text="Send"
+                        bc="color-2"
+                        btnOnClick={(e) => handleSendRequest(e)}
+                    ></Button>
                 {!messageState.error && (
                     <ConfirmationMessage>
                         {messageState.confirm}
@@ -184,23 +182,6 @@ const TextArea = styled.textarea`
     min-height: 10em;
 `;
 
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px 1em 5px;
-    background-color: var(--color-4);
-    color: white;
-
-    &:hover {
-        background-color: #558ba0;
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
-`;
 
 const ErrorMessage = styled.p`
     font-size: 1.2rem;

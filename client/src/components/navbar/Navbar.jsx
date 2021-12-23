@@ -31,7 +31,7 @@ const Navbar = () => {
                         setIsOpen(!isOpen);
                     }}
                 />
-                   <DomLink to="orders/">
+                   <DomLink to="/orders">
                     <MenuLink href="">
                         <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
                     </MenuLink>
@@ -96,7 +96,7 @@ const Navbar = () => {
                     </DomLink>
                 )}
 
-                <DomLink to="orders/">
+                <DomLink to="/orders">
                     <MenuLink href="">
                         <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
                     </MenuLink>
