@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Squash as Hamburger } from "hamburger-react";
 import useWindowDimensions from "../../../reusableFunctions/Functions";
-import { Link as DomLink, Redirect, Route } from "react-router-dom";
+import { Link as DomLink} from "react-router-dom";
 import { logout } from "../../../redux/userRedux";
 import { useDispatch } from "react-redux";
-import ProtectedRoute from "./ProtectedRoute";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

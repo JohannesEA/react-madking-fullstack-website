@@ -1,32 +1,25 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useWindowDimensions from "../../reusableFunctions/Functions";
 import { addProduct } from "../../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
-const audiotoplay = new Audio(audio);
 
 const Product = ({ item }) => {
-    const { width } = useWindowDimensions();
     const location = useLocation();
     const [product, setProduct] = useState({});
     const id = location.pathname.split("/")[2];
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [url, setUrl] = useState();
-    const [audio, setAudio] = useState(new Audio(url));
-
-    console.log("ID: ", id);
 
     useEffect(() => {
         getProducts(dispatch);
     }, [dispatch]);
 
-    const handlePlaySong = (prod) => {
-        setAudio(product.mp3)
+    const handlePlaySong = () => {
+        const audio = new Audio(product.mp3)
         if (isPlaying) {
             audio.pause();
             setIsPlaying(false);
@@ -40,7 +33,6 @@ const Product = ({ item }) => {
         const getProduct = () => {
             try {
                 const res = products.filter((x) => x._id === id);
-                console.log("Result: ", res);
                 setProduct(res[0]);
             } catch (e) {
                 console.log(e);
@@ -76,13 +68,13 @@ const Product = ({ item }) => {
                         <AiOutlinePlayCircle
                             color="black"
                             fontSize={50}
-                            onClick={() => handlePlaySong(product)}
+                            onClick={() => handlePlaySong()}
                         />
                     ) : (
                         <AiOutlinePauseCircle
                             color="black"
                             fontSize={50}
-                            onClick={() => handlePlaySong(product)}
+                            onClick={() => handlePlaySong()}
                         />
                     )}
                 </Buttons>

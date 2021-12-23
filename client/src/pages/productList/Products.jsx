@@ -1,82 +1,29 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BsPlayBtn } from "react-icons/bs";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/apiCalls";
-import { AiOutlinePlayCircle, AiOutlinePauseCircle } from "react-icons/ai";
-
+import ProductBox from "../../components/ProductBox";
 
 const Products = ({ item }) => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [selectedProd, setSelectedProd] = useState({});
-    const [url, setUrl] = useState();
-    const [audio, setAudio] = useState(new Audio(url));
 
     useEffect(() => {
         getProducts(dispatch);
     }, [dispatch]);
 
-    const handlePlaySong = (prod) => {
-        setSelectedProd(prod);
-        setUrl(prod.mp3)
-        if (isPlaying) {
-            audio.pause();
-            setIsPlaying(false);
-        } else {
-            audio.play();
-            setIsPlaying(true);
-        }
-    };
-
-    let path = "";
-    const handleClick = (item) => {
-        path = "/products/" + item._id;
-        navigate(path);
-    };
-
     return (
         <Container>
-            <SectionTitle> Alle Våre Produkter</SectionTitle>
+            <SectionTitle> Alle Våre Beats</SectionTitle>
 
             <ProductListContainer>
-                {products.map((prod, index) => (
-                    <ProductContainer key={index}>
-                        <ImageContainer>
-                            <Image alt={prod._id} src={prod.img} />
-                        </ImageContainer>
-                        <Title>{prod.title}</Title>
-                        <Price>{prod.price} KR</Price>
-                        <Buttons>
-                            <Button
-                                backgroundcolor="#3E768C"
-                                color="white"
-                                hover="#558ba0"
-                                onClick={() => handleClick(prod)}
-                            >
-                                Velg
-                            </Button>
-
-                            {isPlaying && prod._id === selectedProd._id ? (
-                                <AiOutlinePauseCircle
-                                    className="ai-outline-pause"
-                                    color="black"
-                                    fontSize={50}
-                                    onClick={() => handlePlaySong(prod)}
-                                />
-                            ) : (
-                                <AiOutlinePlayCircle
-                                    className="ai-outline-play"
-                                    color="black"
-                                    fontSize={50}
-                                    onClick={() => handlePlaySong(prod)}
-                                />
-                            )}
-                        </Buttons>
-                    </ProductContainer>
+                {products.map((prod) => (
+                    <ProductBox
+                        key={prod._id}
+                        item={prod}
+                        backgroundcolor="color-2"
+                        btntext="Velg"
+                    />
                 ))}
             </ProductListContainer>
         </Container>
@@ -108,39 +55,6 @@ const ProductListContainer = styled.div`
     }
 `;
 
-const ProductContainer = styled.div`
-    border-radius: 1em;
-    justify-content: center;
-    margin: 0.5em;
-
-    height: auto;
-    min-height: 65vh;
-    align-items: center;
-    text-align: center;
-    box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
-    background-color: white;
-
-    &:hover {
-        box-shadow: 1px 2px 19px -1px #636363;
-    }
-
-    @media (max-width: 500px) {
-        height: auto;
-        min-height: 37vh;
-    }
-`;
-
-const ImageContainer = styled.div`
-    justify-content: center;
-    height: 35vh;
-    align-items: center;
-    text-align: center;
-
-    @media (max-width: 500px) {
-        height: 20vh;
-    }
-`;
-
 const SectionTitle = styled.h1`
     font-size: 2rem;
     color: black;
@@ -149,55 +63,4 @@ const SectionTitle = styled.h1`
     @media (max-width: 800px) {
         padding-top: 1em;
     } ;
-`;
-
-const Title = styled.h1`
-    font-size: 1.5rem;
-    color: black;
-`;
-
-const Image = styled.img`
-    border-radius: 1em 1em 0 0;
-    height: 100%;
-    width: 100%;
-`;
-
-const Price = styled.p`
-    color: black;
-    font-size: 1.2rem;
-    font-weight: 200;
-`;
-
-const Buttons = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 auto;
-
-    @media (max-width: 500px) {
-        width: 100%;
-    }
-`;
-const Button = styled.button`
-    padding: 14px 18px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 1.5em;
-    margin: 0 5px;
-    background-color: ${(props) => props.backgroundcolor};
-    color: ${(props) => props.color};
-
-    &:hover {
-        background-color: ${(props) => props.hover};
-        border-radius: 0.5em;
-        box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-    }
-
-    @media (max-width: 500px) {
-        height: auto;
-        padding: 10px 14px;
-    }
 `;

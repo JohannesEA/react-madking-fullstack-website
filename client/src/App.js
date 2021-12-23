@@ -33,6 +33,7 @@ const App = () => {
                 />
                 <Route path="/admin" element={<Adminpage />} />
                 <Route path="/producthandler" element={<AdminProductpage />} />
+
             </Routes>
         </Router>
     );

@@ -1,7 +1,26 @@
 import styled from "styled-components";
+// import ProductBox from "../../components/ProductBox";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect, useState } from "react";
+// import { getProducts, getContent } from "../../redux/apiCalls";
+
 
 const Test = () => {
-    return <Container>Test section</Container>;
+    // const products = useSelector(state => state.product.products);
+    // const dispatch = useDispatch();
+
+
+    // useEffect(() => {
+    //     getProducts(dispatch);
+    // }, [dispatch]);
+
+    return <Container>
+        
+        
+        
+
+        
+        </Container>;
 };
 
 export default Test;
@@ -17,8 +36,3 @@ const Container = styled.div`
     }
 `;
 
-// const Item = styled.div`
-// flex: ${props => props.flex};
-// padding: 10em;
-// background-color: ${props => props.bc};
-// `;

@@ -46,7 +46,7 @@ const Navbar = () => {
                     <MenuLink href="">Om oss</MenuLink>
                 </Link>
 
-                <Link
+                {/* <Link
                     to="beats"
                     className="nav-logo"
                     spy={true}
@@ -56,7 +56,12 @@ const Navbar = () => {
                 >
                     {" "}
                     <MenuLink href="">Våre Beats</MenuLink>
-                </Link>
+                </Link> */}
+
+                <DomLink to="/productlist">
+                        {" "}
+                        <MenuLink href="">Våre Beats</MenuLink>
+                    </DomLink>
                 <Link
                     to="contact"
                     className="nav-logo"
