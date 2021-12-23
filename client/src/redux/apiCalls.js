@@ -25,6 +25,7 @@ import {
     updateContentStart,
     updateContentSuccess
 } from "./contentRedux";
+// import { paymentSuccess, startPayment, paymentFail } from "./checkoutRedux";
 
 export const login = async (dispatch, user) => {
     dispatch(loginStart());
@@ -32,11 +33,9 @@ export const login = async (dispatch, user) => {
         console.log(user);
         const res = await publicRequest.post("api/auth/login", user);
         dispatch(loginSuccess(res.data));
-
     } catch (err) {
         dispatch(loginFailure());
         console.log("Login Failed!", err);
-
     }
 };
 export const getProducts = async dispatch => {
@@ -103,21 +102,25 @@ export const updateContent = async (id, content, dispatch) => {
     try {
         // update
         const res = await userRequest.put(`api/contents/${id}`, content);
-        console.log(res.data)
-        dispatch(updateContentSuccess({ id, content}));
+        console.log(res.data);
+        dispatch(updateContentSuccess({ id, content }));
     } catch (err) {
         dispatch(updateContentFailure());
     }
 };
 
-export const handlePayment = async (token, cart) => {
-    try {
-        // update
-        const res = await userRequest.post(`api/payment/pay`,{ tokenId: token.id, amount:cart.total} );
-        console.log(res.data);
-;
-    } catch (err) {
-       console.log(res);
-    }
-};
-
+// export const handlePayment = async (token, cart, dispatch) => {
+//     dispatch(startPayment());
+//     try {
+//         // update
+//         const res = await userRequest.post("https://react-madking-shop.herokuapp.com/api/checkout/payment", {
+//             tokenId: token.id,
+//             amount: cart.total
+//         });
+//         console.log(res.data);
+//         dispatch(paymentSuccess());
+//     } catch (err) {
+//         console.log(res);
+//         dispatch(paymentFail());
+//     }
+// };

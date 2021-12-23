@@ -5,7 +5,8 @@ import { removeProduct, resetCart } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
-import handlePayment from "../../redux/apiCalls";
+import axios from "axios";
+
 const KEY =
     "pk_test_51JwS4BDJ6KD8X4jUYGm2VeyofI9YOdonXbCHy3GB12JGM3gPHdY7l3qi9cd7fAvMsTtmiZdu0sjZWy20SxAghpui007JvXEC6j";
 
@@ -26,9 +27,24 @@ const Order = () => {
         setStripeToken(token);
     };
 
-    useEffect(() => {
-        handlePayment(stripeToken, cart);
-    }, [stripeToken])
+
+useEffect(() => {
+    const makeRequest = async () => {
+        try {
+ // update
+ const res = await axios.post("https://react-madking-shop.herokuapp.com/api/checkout/payment", {
+     tokenId: stripeToken.id,
+     amount: cart.total
+ });
+ console.log(res.data);
+} catch (err) {
+ console.log(err);
+}  
+}
+stripeToken && makeRequest();
+}, [stripeToken])
+
+
 
     return (
         <Container>
