@@ -109,3 +109,15 @@ export const updateContent = async (id, content, dispatch) => {
         dispatch(updateContentFailure());
     }
 };
+
+export const handlePayment = async (token, cart) => {
+    try {
+        // update
+        const res = await userRequest.post(`api/payment/pay`,{ tokenId: token.id, amount:cart.total} );
+        console.log(res.data);
+;
+    } catch (err) {
+       console.log(res);
+    }
+};
+

@@ -3,8 +3,14 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { removeProduct, resetCart } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { useState, useEffect } from "react";
+import handlePayment from "../../redux/apiCalls";
+const KEY =
+    "pk_test_51JwS4BDJ6KD8X4jUYGm2VeyofI9YOdonXbCHy3GB12JGM3gPHdY7l3qi9cd7fAvMsTtmiZdu0sjZWy20SxAghpui007JvXEC6j";
 
 const Order = () => {
+    const [stripeToken, setStripeToken] = useState(null);
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
@@ -15,6 +21,14 @@ const Order = () => {
     const handleResetCart = () => {
         dispatch(resetCart());
     };
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    };
+
+    useEffect(() => {
+        handlePayment(stripeToken, cart);
+    }, [stripeToken])
 
     return (
         <Container>
@@ -52,13 +66,25 @@ const Order = () => {
                 </OrderSummary>
                 <Buttons>
                     {" "}
-                    <Button
-                        backgroundcolor="#3E768C"
-                        color="white"
-                        hover="#558ba0"
+                    <StripeCheckout
+                        name="MadKing Music"
+                        image="/assets/images/music-images/img1.jpg"
+                        billingAddress
+                        shippingAddress
+                        description={`Total pris er `+cart.total+` Kr`}
+                        amount={2000}
+                        token={onToken}
+                        stripeKey={KEY}
                     >
-                        Sjekk Ut
-                    </Button>
+                        {" "}
+                        <Button
+                            backgroundcolor="#3E768C"
+                            color="white"
+                            hover="#558ba0"
+                        >
+                            Sjekk Ut
+                        </Button>
+                    </StripeCheckout>
                     <Button
                         backgroundcolor="red"
                         color="white"
@@ -85,7 +111,6 @@ const Container = styled.div`
     min-height: 80vh;
 
     background-color: white;
-
 `;
 
 const OrderDetailsContainer = styled.div`

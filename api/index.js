@@ -6,6 +6,8 @@ const productRoute = require("./routes/product");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const contentRoute = require("./routes/content");
+const stripeRoute = require("./routes/stripe");
+
 
 // const path = require('path');
 //ndjsvnjsavdmjkasdvn1e3eu127
@@ -27,6 +29,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/contents", contentRoute);
+app.use("/api/checkout", stripeRoute);
+
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.join(__dirname, "./client/build")));
