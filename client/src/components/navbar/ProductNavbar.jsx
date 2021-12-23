@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
+import { Link as DomLink } from "react-router-dom";
 
 const ProductNavbar = () => {
     const user = useSelector((state) => state.user.currentUser);
@@ -21,17 +22,31 @@ const ProductNavbar = () => {
 
     return (
         <Nav>
-            <Link to="/">
-                <Logo>MadKing</Logo>
-            </Link>
+            {width > 350 && (
+                <Link style={{ textDecoration: 'none' }} to="/">
+        
+                        {" "}
+                        <Logo>MadKing</Logo>
+            
+                </Link>
+            )}
 
             {width < 800 && (
-                <Hamburger
-                    color="white"
-                    onToggle={() => {
-                        setIsOpen(!isOpen);
-                    }}
-                />
+                <HamBurderContainer>
+                    {" "}
+                    <Hamburger
+                        color="white"
+                        onToggle={() => {
+                            setIsOpen(!isOpen);
+                        }}
+                    />
+                    <DomLink to="orders/">
+                        <MenuLink href="">
+                            <AiOutlineShoppingCart fontSize="1.2rem" />(
+                            {quantity})
+                        </MenuLink>
+                    </DomLink>
+                </HamBurderContainer>
             )}
 
             <Menu isOpen={isOpen}>
@@ -110,6 +125,8 @@ const MenuLink = styled.p`
     }
 `;
 
+
+
 const Logo = styled.p`
     padding: 0.1rem 0;
     color: var(--color-text);
@@ -128,6 +145,16 @@ const Menu = styled.div`
         flex-direction: column;
         max-height: ${({ isOpen }) => (isOpen ? "400px" : "0")};
         transition: max-height 0.3s ease-in;
+        width: 100%;
+    }
+`;
+
+const HamBurderContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 350px) {
         width: 100%;
     }
 `;

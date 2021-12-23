@@ -100,8 +100,8 @@ const Container = styled.div`
     color: ${(prop) => prop.color};
     flex-direction: column;
     border-radius: 1em;
-    min-width: 15em;
-    min-height: 20em;
+    min-width: 10em;
+    min-height: 12em;
     max-width: 40em;
     max-height: 50em;
     margin: 0.5em;
@@ -112,6 +112,11 @@ const Container = styled.div`
         background-color: ${(prop) => prop.hover};
         box-shadow: -1px 0px 37px -1px rgba(0, 0, 0, 0.75);
 
+    }
+
+    @media (max-width: 400px) {
+        min-width: 10em;
+        max-height: 20em;
     }
 `;
 const Top = styled.div`
@@ -125,6 +130,10 @@ const Image = styled.img`
   width: 100%;
     border-radius: 1em 1em 0 0;
     transition: all 0.3s ease;
+
+    @media (max-width: 400px) {
+       height: 9em;
+    }
 
 
 `;

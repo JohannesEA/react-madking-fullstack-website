@@ -50,7 +50,7 @@ const ProductListContainer = styled.div`
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 300px) {
+    @media (max-width: 350px) {
         grid-template-columns: repeat(1, 1fr);
     }
 `;

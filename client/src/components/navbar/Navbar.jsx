@@ -25,12 +25,19 @@ const Navbar = () => {
             <Logo href="">MadKing</Logo>
 
             {width < 930 && (
-                <Hamburger
+                <HamBurderContainer>   <Hamburger
                     color="white"
                     onToggle={() => {
                         setIsOpen(!isOpen);
                     }}
                 />
+                   <DomLink to="orders/">
+                    <MenuLink href="">
+                        <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
+                    </MenuLink>
+                </DomLink></HamBurderContainer>
+             
+                
             )}
 
             <Menu isOpen={isOpen}>
@@ -90,7 +97,6 @@ const Navbar = () => {
                 )}
 
                 <DomLink to="orders/">
-                    {" "}
                     <MenuLink href="">
                         <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
                     </MenuLink>
@@ -165,4 +171,10 @@ const Menu = styled.div`
         transition: max-height 0.3s ease-in;
         width: 100%;
     }
+`;
+
+const HamBurderContainer = styled.div`
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;

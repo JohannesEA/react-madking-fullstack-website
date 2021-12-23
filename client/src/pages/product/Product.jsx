@@ -13,6 +13,8 @@ const Product = ({ item }) => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [confirmationMessage, setConfirmationMessage] = useState("");
+    const [productAdded, setProductAdded] = useState(false);
 
     useEffect(() => {
         getProducts(dispatch);
@@ -43,6 +45,9 @@ const Product = ({ item }) => {
 
     const handleClick = () => {
         dispatch(addProduct({ ...product }));
+        setProductAdded(true);
+        setConfirmationMessage("Beat lagt til i handlekurven")
+
     };
 
     return (
@@ -78,6 +83,7 @@ const Product = ({ item }) => {
                         />
                     )}
                 </Buttons>
+               { productAdded && <ConfirmationMessage>{confirmationMessage}</ConfirmationMessage>}
             </ProductInformationContainer>
         </Container>
     );
@@ -147,6 +153,13 @@ const Price = styled.p`
     font-weight: 800;
     color: black;
 `;
+
+const ConfirmationMessage = styled.p`
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: green;
+`;
+
 
 const Buttons = styled.div`
     display: flex;
