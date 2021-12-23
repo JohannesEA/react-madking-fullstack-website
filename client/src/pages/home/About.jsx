@@ -151,4 +151,14 @@ const Image = styled.img`
     max-height: 70vh;
     max-width: 50vh;
     border-radius: 1em;
+
+    @media (max-width: 800px) {
+        max-height: 50vh;
+        max-width: 40vh;
+    }
+
+    @media (max-width: 400px) {
+        max-height: 40vh;
+        max-width: 30vh;
+    }
 `;

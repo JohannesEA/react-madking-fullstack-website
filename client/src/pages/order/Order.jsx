@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "../../components/Button"
+import Button from "../../components/Button";
 
 const KEY =
     "pk_test_51JwS4BDJ6KD8X4jUYGm2VeyofI9YOdonXbCHy3GB12JGM3gPHdY7l3qi9cd7fAvMsTtmiZdu0sjZWy20SxAghpui007JvXEC6j";
@@ -28,24 +28,23 @@ const Order = () => {
         setStripeToken(token);
     };
 
-
-useEffect(() => {
-    const makeRequest = async () => {
-        try {
- // update
- const res = await axios.post("https://react-madking-shop.herokuapp.com/api/checkout/payment", {
-     tokenId: stripeToken.id,
-     amount: cart.total
- });
- console.log(res.data);
-} catch (err) {
- console.log(err);
-}  
-}
-stripeToken && makeRequest();
-}, [stripeToken])
-
-
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                const res = await axios.post(
+                    "https://react-madking-shop.herokuapp.com/api/checkout/payment",
+                    {
+                        tokenId: stripeToken.id,
+                        amount: cart.total,
+                    }
+                );
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken]);
 
     return (
         <Container>
@@ -88,33 +87,19 @@ stripeToken && makeRequest();
                         image="/assets/images/music-images/img1.jpg"
                         billingAddress
                         shippingAddress
-                        description={`Total pris er `+cart.total+` Kr`}
+                        description={`Total pris er ` + cart.total + ` Kr`}
                         amount={2000}
                         token={onToken}
                         stripeKey={KEY}
                     >
                         {" "}
-                        <Button
-                         text={"Sjekk Ut"}
-                         bc="color-2"
-                        >
-                        </Button>
-        
+                        <Button text={"Sjekk Ut"} bc="color-2"></Button>
                     </StripeCheckout>
                     <Button
-                         text={"Tilbakestill"}
-                         bc="color-3"
-                         btnOnClick={handleResetCart}
-                        >
-                        </Button>
-                    {/* <Button
-                        backgroundcolor="red"
-                        color="white"
-                        hover="#ff7b7b"
-                        onClick={() => handleResetCart()}
-                    >
-                        Tilbakestill
-                    </Button> */}
+                        text={"Tilbakestill"}
+                        bc="color-3"
+                        btnOnClick={handleResetCart}
+                    ></Button>
                 </Buttons>
             </OrderContainer>
         </Container>
@@ -231,24 +216,6 @@ const Buttons = styled.div`
     width: 100%;
     min-width: 12em;
 `;
-
-// const Button = styled.button`
-//     padding: 14px 18px;
-//     transition: all 0.2s ease;
-//     font-weight: 600;
-//     cursor: pointer;
-//     border: none;
-//     border-radius: 1.5em;
-//     margin: 0 5px;
-//     background-color: ${(props) => props.backgroundcolor};
-//     color: ${(props) => props.color};
-
-//     &:hover {
-//         background-color: ${(props) => props.hover};
-//         border-radius: 0.5em;
-//         box-shadow: 0.2rem 0.2rem 0 0 rgba(255, 255, 255, 0.15);
-//     }
-// `;
 
 const OrderSummary = styled.div``;
 
