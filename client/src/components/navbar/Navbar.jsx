@@ -33,7 +33,7 @@ const Navbar = () => {
                 />
                    <DomLink to="/orders">
                     <MenuLink href="">
-                        <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
+                        <AiOutlineShoppingCart fontSize="1.2rem" />{quantity}
                     </MenuLink>
                 </DomLink></HamBurderContainer>
              
@@ -98,7 +98,7 @@ const Navbar = () => {
 
                 <DomLink to="/orders">
                     <MenuLink href="">
-                        <AiOutlineShoppingCart fontSize="1.2rem" />({quantity})
+                        <AiOutlineShoppingCart fontSize="1.2rem" />{quantity}
                     </MenuLink>
                 </DomLink>
             </Menu>
