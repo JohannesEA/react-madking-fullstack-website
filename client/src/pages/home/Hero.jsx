@@ -20,7 +20,7 @@ const Hero = () => {
     
 
     return (
-        <Container id="hero" img={contents[0].heroimg}>
+        <Container id="hero" img={contents.length > 0 ? contents[0].heroimg : "/assets/images/misuc-images/img4.jpg"}>
             <Left>
                 {contents.map(title => (<Title key={title._id + "mdks22mk"}>{title.herotitle}</Title>))}
                 <ButtonContainer>

@@ -22,6 +22,8 @@ const About = () => {
         getContent(dispatch);
     }, [dispatch]);
 
+    console.log("Contents: ", contents);
+
 
     return (
         <Container id="about" >
@@ -55,7 +57,7 @@ const About = () => {
 
             <Right>
                 <Image
-                    src={contents[0].aboutimg}
+                    src={contents.length > 0 ? contents[0].aboutimg : "/assets/images/misuc-images/img5.jpg"}
                     alt="about-img"
                 />
                 {width < 800 && (
