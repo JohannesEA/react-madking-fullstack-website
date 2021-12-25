@@ -23,7 +23,9 @@ mongoose
   .then(() => console.log("db connection successfull"))
   .catch((err) => console.log(err));
 
-app.use(cors());
+  app.use(cors({
+    origin: 'https://fervent-tesla-daa34b.netlify.app/'
+  }))
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
