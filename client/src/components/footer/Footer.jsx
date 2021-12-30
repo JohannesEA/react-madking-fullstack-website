@@ -1,127 +1,135 @@
-import styled from "styled-components";
 
-import { mobile } from "../../reusableFunctions/responsive";
+
+
+import styled from "styled-components";
 import { Link } from "react-scroll";
+import {
+  AiOutlineCopyrightCircle,
+  AiOutlineGithub,
+  AiOutlineLinkedin,
+} from "react-icons/ai";
+import getWindowDimensions from "../../reusableFunctions/Functions";
 
 const Footer = () => {
-    return (
-        <Container>
-            <Left>
-                <Link
-                    to="hero"
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={300}
-                >
-                    {" "}
-                    <Logo>MadKing</Logo>
-                </Link>
-
-                <Desc>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form, by injected humour, or randomised words which don’t
-                    look even slightly believable.
-                </Desc>
-                <SocialContainer></SocialContainer>
-            </Left>
-            <Center>
-                <Title>Useful Links</Title>
-                <List>
-                    <ListItem>Hjem</ListItem>
-                    <ListItem>Om oss</ListItem>
-                    <ListItem>Våre beats</ListItem>
-                    <ListItem>Kontakt oss</ListItem>
-                    <ListItem>Logg inn</ListItem>
-                </List>
-            </Center>
+  const { width } = getWindowDimensions();
+  return (
+    <Container>
+      <Top>
+        <Right>
             <Right>
                 <Title>Våre betalingsløsninger</Title>
-
-                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+                <Payment className="payment-logo" src="https://i.ibb.co/Qfvn4z6/payment.png" />
             </Right>
-        </Container>
-    );
+        </Right>
+        {width > 800 && (
+          <Left>
+            <Link
+              to="hero"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={300}
+            >
+              <Image src="/assets/logos/logo.png" alt="footer-img" />{" "}
+            </Link>
+          </Left>
+        )}
+      </Top>
+
+      <Bottom>
+      madkingmusic.com&nbsp;<AiOutlineCopyrightCircle  fontSize={15}  />&nbsp;2021
+      </Bottom>
+      <Bottom2 onClick={() => window.location.href="https://mojo-websites.no/"}>
+Website Created By mojo-websites.no  
+      </Bottom2>
+    </Container>
+  );
 };
 
 export default Footer;
 
 const Container = styled.div`
-    display: flex;
-    ${mobile({ flexDirection: "column" })}
-    background-color: var(--color-1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  margin-top: 3em;
+`;
+
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-1);
+  width: 100%;
+  height: 42vh;
+
+
+`;
+
+const Image = styled.img`
+  max-height: 40vh;
 `;
 
 const Left = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    color: white;
+  background-color: var(--color-1);
+  width: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 `;
 
-const Logo = styled.h1``;
+const Right = styled.div`
+  background-color: var(--color-1);
+  width: 60%;
+  height: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1.5rem;
 
-const Desc = styled.p`
-    margin: 20px 0px;
-`;
-
-const SocialContainer = styled.div`
-    display: flex;
-`;
-
-// const SocialIcon = styled.div`
-//   width: 40px;
-//   height: 40px;
-//   border-radius: 50%;
-//   color: white;
-//   background-color: #${(props) => props.color};
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin-right: 20px;
-// `;
-
-const Center = styled.div`
-    flex: 1;
-    padding: 20px;
-    color: white;
-
-    ${mobile({ display: "none" })}
+  @media (max-width: 800px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 const Title = styled.h3`
     margin-bottom: 30px;
+    font-size: 1.2rem;
+
 `;
 
-const List = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-`;
 
-const ListItem = styled.li`
-    width: 50%;
-    margin-bottom: 10px;
-`;
 
-const Right = styled.div`
-    flex: 1;
-    padding: 20px;
-    color: white;
-
-    ${mobile({ backgroundColor: "#214554" })}
-`;
-
-// const ContactItem = styled.div`
-//   margin-bottom: 20px;
-//   display: flex;
-//   align-items: center;
-// `;
 
 const Payment = styled.img`
-    width: 50%;
+    
+`;
+
+
+const Bottom = styled.div`
+  background-color: var(--color-1);
+  height: 5vh;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+`;
+
+const Bottom2 = styled.div`
+  background-color: var(--color-2);
+  height: 5vh;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 `;

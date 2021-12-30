@@ -180,6 +180,8 @@ const TextArea = styled.textarea`
     max-width: 100%;
     font-size: 1.2rem;
     min-height: 10em;
+    font-family: 'Montserrat';
+
 `;
 
 
