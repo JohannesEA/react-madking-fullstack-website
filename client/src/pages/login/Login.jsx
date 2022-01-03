@@ -8,7 +8,7 @@ const Login = () => {
     const [username, setUsername] = useState({});
     const [password, setPassword] = useState({});
     const dispatch = useDispatch();
-    const { isFetching, error } = useSelector((state) => state.user);
+    const { error } = useSelector((state) => state.user);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -50,10 +50,11 @@ const Container = styled.div`
     justify-content: center;
     flex-direction: column;
     padding: 10em 1em 5em 1em;
-    background-color: white;
+    background-color: var(--color-dark);
 `;
 
 const LoginContainer = styled.div`
+    background-color: var(--color-light);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;

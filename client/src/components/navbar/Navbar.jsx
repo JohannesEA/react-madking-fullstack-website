@@ -24,7 +24,7 @@ const Navbar = () => {
         <Nav>
             <Logo href="">MadKing</Logo>
 
-            {width < 930 && (
+            {width < 1050 && (
                 <HamBurderContainer>   <Hamburger
                     color="white"
                     onToggle={() => {
@@ -115,7 +115,7 @@ const Nav = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background: var(--color-1);
+    background-color: var(--color-dark);
     position: absolute;
     top: 0;
     left: 0;
@@ -164,7 +164,7 @@ const Menu = styled.div`
     justify-content: space-between;
     align-items: center;
     position: relative;
-    @media (max-width: 930px) {
+    @media (max-width: 1050px) {
         overflow: hidden;
         flex-direction: column;
         max-height: ${({ isOpen }) => (isOpen ? "500px" : "0")};

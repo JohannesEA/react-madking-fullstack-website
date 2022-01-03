@@ -44,7 +44,7 @@ const Order = () => {
             }
         };
         stripeToken && makeRequest();
-    }, [stripeToken]);
+    }, [stripeToken, cart.total]);
 
     return (
         <Container>
@@ -116,17 +116,18 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     min-height: 80vh;
-
-    background-color: white;
+    background-color: var(--color-dark);
 `;
 
 const OrderDetailsContainer = styled.div`
+    background-color: var(--color-light);
     position: relative;
     display: flex;
     flex-direction: column;
 `;
 
 const OrderContainer = styled.div`
+    background-color: var(--color-light);
     display: flex;
     flex-direction: column;
     padding: 1em;
@@ -144,7 +145,7 @@ const Title = styled.h1`
 const OrderDetails = styled.div`
     height: auto;
     width: 100%;
-    background-color: white;
+    background-color: var(--color-light);
     display: flex;
     flex-direction: row;
     margin: 0.5em auto;
@@ -155,7 +156,7 @@ const Detail = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
-    color: white;
+    color: var(--color-dark);
     padding: 0.5em;
     font-size: 1.5rem;
     margin: 0 0.5em;

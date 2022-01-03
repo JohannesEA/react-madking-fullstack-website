@@ -10,7 +10,9 @@ box-sizing: border-box;
     --color-3: #214554;
     --color-4: #3E768C;
     --color-5: #B0CDD9;
-    --color-text: white;
+    --color-dark: #030102;
+    --color-light: #F2F2F2;
+    --color-text: #F2F2F2;
     --color-button-hover: #254A59;
   }
 `;

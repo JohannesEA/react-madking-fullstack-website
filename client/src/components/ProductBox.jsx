@@ -8,8 +8,7 @@ import styled, { keyframes } from "styled-components"
 const ProductBox = ({
     item,
     backgroundcolor,
-    btntext,
-    onClickFunction,
+    btntext
 }) => {
     const [selectedProd, setSelectedProd] = useState({});
     const [isPlaying, setIsPlaying] = useState(false);
@@ -45,10 +44,10 @@ const ProductBox = ({
     const [BACKGROUND_COLOR, setBACKGROUNDCOLOR] = useState("");
     const [COLOR, setCOLOR] = useState("");
     const [HOVER_COLOR, setHOVERCOLOR] = useState("");
-    const BACKGROUND_COLOR_ONE = "#0B1E26";
+    const BACKGROUND_COLOR_ONE = "#030102";
     const COLOR_ONE = "white";
-    const HOVERCOLOR_ONE = "#112a35";
-    const BACKGROUND_COLOR_TWO = "#f3f3f3";
+    const HOVERCOLOR_ONE = "#180911";
+    const BACKGROUND_COLOR_TWO = "#F2F2F2";
     const COLOR_TWO = "BLACK";
     const HOVERCOLOR_TWO = "#FFF";
 
@@ -66,7 +65,7 @@ const ProductBox = ({
         };
 
         handleColor();
-    }, [BACKGROUND_COLOR, COLOR, HOVER_COLOR]);
+    }, [BACKGROUND_COLOR, COLOR, HOVER_COLOR, backgroundcolor]);
     return (
         <Container
             backgroundcolor={BACKGROUND_COLOR}
@@ -125,7 +124,7 @@ const Container = styled.div`
     max-height: 50em;
     margin: 0.5em;
     transition: all 0.3s ease;
-    box-shadow: 1px 2px 19px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 2px 19px -1px rgba(68, 68, 68, 0.75);
     animation: ${(prop) => prop.isActive ? animationTwo : null} 1s linear infinite;
 
     &:hover {
@@ -181,42 +180,7 @@ const animationTwo = keyframes`
   }
 `;
 
-const animation = keyframes`
-0%{
-    border: 1px solid black;
-}
-25%{
-    border: 1px solid orange;
 
-
-}
-50%{
-    border: 1px solid green;
-
-}
-100%{
-    border: 1px solid blue;
-
-}
-`;
-const rotate = keyframes`
-    100% {
-      transform: rotate(360deg);
-    }
-`;
-
-const Animation = styled.div`
-  animation: ${animation} 2s linear infinite, ${rotate} 5s linear infinite ;
-  width: 50px;
-  height: 50px;
-  margin-top: 1em;
-  
-  & .path {
-    stroke: #5652BF;
-    stroke-linecap: round;
-    animation: rotate 1.5s ease-in-out infinite;
-  }
-`;
 
 const Top = styled.div`
     height: 20em;

@@ -84,7 +84,7 @@ const Container = styled.div`
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: var(--color-1);
+    background-color: var(--color-dark);
 
     @media (max-width: 800px) {
         flex-direction: column;

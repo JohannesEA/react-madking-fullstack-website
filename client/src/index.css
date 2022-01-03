@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat';
-  background-color: var(--color-2);
+  background-color: var(--color-light);
   box-sizing: border-box;
 }
 
@@ -17,12 +17,12 @@ body {
 }
 
 .slick-dots li button:before {
-  color: white;
+  color: var(--color-dark);
   font-size: .5rem;
 }
 
 .slick-dots li.slick-active button:before {
-  color: #B0CDD9 !important;
+  color: #323b3f !important;
   font-size: .7rem;
 
 }

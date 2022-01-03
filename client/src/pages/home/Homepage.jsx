@@ -7,7 +7,6 @@ import About from "./About";
 import ProcessOfWork from "./ProcessOfWork";
 import MusicCarouselle from "./MusicCarouselle";
 import Contact from "./Contact";
-// import Fab from "@material-ui/core/Fab";
 import { Link } from "react-scroll";
 import "./homepage.css";
 import { AiOutlineArrowUp } from "react-icons/ai";

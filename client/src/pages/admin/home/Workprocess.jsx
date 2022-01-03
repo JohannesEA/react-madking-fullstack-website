@@ -47,7 +47,7 @@ const WorkProcess = () => {
 
     return (
         <Container>
-            <Title>Om Oss</Title>
+            <Title>Jobbprosess</Title>
 
             <Form>
                 <FormTitle>
@@ -113,6 +113,8 @@ const Container = styled.div`
     padding-top: 5em;
     flex-direction: column;
     background-color: white;
+    padding-bottom: 5em;
+
 
 `;
 

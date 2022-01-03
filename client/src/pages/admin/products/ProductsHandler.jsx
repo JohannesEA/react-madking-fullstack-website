@@ -27,6 +27,10 @@ const ProductHandler = () => {
     const [productToEditId, setProductToEditId] = useState();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
+    const [isLoading, setIsLoading] = useState(false);
+    const [imgError, setImgError] = useState(false);
+    const [mp3Error, setMp3Error] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     //Get input values
     const handleChange = (e) => {
@@ -49,13 +53,12 @@ const ProductHandler = () => {
         }
     };
 
-
     const handleMp3Upload = (e) => {
         e.preventDefault();
         const fileName = new Date().getTime() + e.target.files[0].name;
         const storage = getStorage(app);
         const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef,  e.target.files[0]);
+        const uploadTask = uploadBytesResumable(storageRef, e.target.files[0]);
 
         uploadTask.on(
             "state_changed",
@@ -68,14 +71,19 @@ const ProductHandler = () => {
                 switch (snapshot.state) {
                     case "paused":
                         console.log("Upload is paused");
+                        setIsLoading(false);
                         break;
                     case "running":
                         console.log("Upload is running");
+                        setIsLoading(true);
                         break;
                     default:
+                        setIsLoading(false);
                 }
             },
             (error) => {
+                setMp3Error(true);
+                setIsLoading(false);
                 console.log(error);
             },
             () => {
@@ -84,17 +92,18 @@ const ProductHandler = () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     setUserInput({ ...userInput, mp3: downloadURL });
                 });
+                setMp3Error(false);
+                setIsLoading(false);
             }
         );
-
-    } 
+    };
 
     const handleImageUpload = (e) => {
         e.preventDefault();
         const fileName = new Date().getTime() + e.target.files[0].name;
         const storage = getStorage(app);
         const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef,  e.target.files[0]);
+        const uploadTask = uploadBytesResumable(storageRef, e.target.files[0]);
 
         uploadTask.on(
             "state_changed",
@@ -107,14 +116,19 @@ const ProductHandler = () => {
                 switch (snapshot.state) {
                     case "paused":
                         console.log("Upload is paused");
+                        setIsLoading(false);
                         break;
                     case "running":
                         console.log("Upload is running");
+                        setIsLoading(true);
                         break;
                     default:
+                        setIsLoading(false);
                 }
             },
             (error) => {
+                setImgError(true);
+                setIsLoading(false);
                 console.log(error);
             },
             () => {
@@ -123,15 +137,17 @@ const ProductHandler = () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     setUserInput({ ...userInput, img: downloadURL });
                 });
+                setImgError(false);
+                setIsLoading(false);
             }
         );
-
-    } 
+    };
 
     const handleAddNewProduct = (e) => {
         e.preventDefault();
-        console.log("Product: ",userInput);
+        console.log("Product: ", userInput);
         addProduct(userInput, dispatch);
+        setSuccess(true)
     };
 
     const handleDelete = (prod) => {
@@ -166,6 +182,8 @@ const ProductHandler = () => {
                     placeholder="bilde.."
                     onChange={(e) => handleImageUpload(e)}
                 />
+                {isLoading && <p>Laster opp bilde...</p>}
+                {imgError && <p>Feil ved opplasting av bilde</p>}
                 <Input
                     type="text"
                     name="description"
@@ -184,12 +202,15 @@ const ProductHandler = () => {
                     placeholder="pris.."
                     onChange={(e) => handleChange(e)}
                 />
-                     <Input
+                <Input
                     type="file"
                     name="mp3"
                     placeholder="mp3.."
                     onChange={(e) => handleMp3Upload(e)}
                 />
+                {isLoading && <p>Laster opp musikk...</p>}
+                {mp3Error && <p>Feil ved opplasting av musikk</p>}
+
                 <Button
                     backgroundcolor="#3E768C"
                     color="white"
@@ -198,6 +219,7 @@ const ProductHandler = () => {
                 >
                     Legg Til
                 </Button>{" "}
+                {success && <p>Produkt er lastet opp!</p>}
             </Form>
 
             <Table>
@@ -254,7 +276,7 @@ export default ProductHandler;
 const Table = styled.table`
     margin-top: 3em;
     width: 80%;
-
+    margin-bottom: 3em;
 `;
 
 const TBody = styled.tbody``;
@@ -290,7 +312,7 @@ const Container = styled.div`
     justify-content: center;
     padding-top: 5em;
     flex-direction: column;
-    background-color:white;
+    background-color: white;
 `;
 
 const Title = styled.h1`

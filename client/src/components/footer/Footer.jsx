@@ -5,8 +5,6 @@ import styled from "styled-components";
 import { Link } from "react-scroll";
 import {
   AiOutlineCopyrightCircle,
-  AiOutlineGithub,
-  AiOutlineLinkedin,
 } from "react-icons/ai";
 import getWindowDimensions from "../../reusableFunctions/Functions";
 
@@ -15,13 +13,8 @@ const Footer = () => {
   return (
     <Container>
       <Top>
-        <Right>
-            <Right>
-                <Title>Våre betalingsløsninger</Title>
-                <Payment className="payment-logo" src="https://i.ibb.co/Qfvn4z6/payment.png" />
-            </Right>
-        </Right>
-        {width > 800 && (
+
+
           <Left>
             <Link
               to="hero"
@@ -30,10 +23,17 @@ const Footer = () => {
               offset={-100}
               duration={300}
             >
-              <Image src="/assets/logos/logo.png" alt="footer-img" />{" "}
+              <Image src="/assets/logos/logo7.png" alt="footer-img" />{" "}
             </Link>
           </Left>
-        )}
+
+          <Right>
+            <Right>
+                <Title>Våre betalingsløsninger</Title>
+                <Payment className="payment-logo" src="https://i.ibb.co/Qfvn4z6/payment.png" />
+            </Right>
+        </Right>
+
       </Top>
 
       <Bottom>
@@ -52,18 +52,23 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: white;
-  margin-top: 3em;
+  background-color: var(--color-light);
+
+
 `;
 
 const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-1);
+  background-color: var(--color-light);
   width: 100%;
   height: 42vh;
+  @media (max-width: 800px){
+    flex-direction: column;
+    height: 60vh;
 
+  }
 
 `;
 
@@ -72,9 +77,9 @@ const Image = styled.img`
 `;
 
 const Left = styled.div`
-  background-color: var(--color-1);
+  background-color: var(--color-light);
   width: 50%;
-  color: white;
+  color: var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,10 +87,10 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  background-color: var(--color-1);
+  background-color: var(--color-light);
   width: 60%;
   height: 50%;
-  color: white;
+  color: var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,10 +118,10 @@ const Payment = styled.img`
 
 
 const Bottom = styled.div`
-  background-color: var(--color-1);
+  background-color: var(--color-light);
   height: 5vh;
   width: 100%;
-  color: white;
+  color: var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,12 +129,15 @@ const Bottom = styled.div`
 `;
 
 const Bottom2 = styled.div`
-  background-color: var(--color-2);
+  cursor: pointer;
+  background-color: var(--color-dark);
   height: 5vh;
   width: 100%;
-  color: white;
+  color: var(--color-light);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
+  padding: 0.8rem;
+
 `;

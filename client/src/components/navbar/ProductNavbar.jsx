@@ -89,7 +89,7 @@ const Nav = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background: var(--color-1);
+    background-color: var(--color-dark);
     position: absolute;
     top: 0;
     left: 0;

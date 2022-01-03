@@ -14,7 +14,7 @@ const Products = ({ item }) => {
 
     return (
         <Container>
-            <SectionTitle> Alle Våre Beats</SectionTitle>
+            <SectionTitle>Våre Beats</SectionTitle>
 
             <ProductListContainer>
                 {products.map((prod) => (
@@ -34,8 +34,8 @@ export default Products;
 
 const Container = styled.div`
     text-align: center;
-    background-color: white;
-
+    background-color: var(--color-dark);
+    padding-bottom: 3em;
     @media (max-width: 800px) {
         flex-direction: column;
         padding-top: 7em;
@@ -57,7 +57,7 @@ const ProductListContainer = styled.div`
 
 const SectionTitle = styled.h1`
     font-size: 2rem;
-    color: black;
+    color: var(--color-light);
     padding-top: 4em;
 
     @media (max-width: 800px) {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Button = ({
     text,
     btnOnClick,
-    bc,
+    bc
 }) => {
     const [BACKGROUND_COLOR, setBACKGROUNDCOLOR] = useState("");
     const [COLOR, setCOLOR] = useState("");
@@ -25,7 +25,6 @@ const Button = ({
                 setBACKGROUNDCOLOR(BACKGROUND_COLOR_ONE);
                 setCOLOR(COLOR_ONE);
                 setHOVERCOLOR(HOVERCOLOR_ONE);
-                console.log("background: ".BACKGROUND_COLOR);
             } else if (bc === "color-1") {
                 setBACKGROUNDCOLOR(BACKGROUND_COLOR_TWO);
                 setCOLOR(COLOR_TWO);
@@ -39,7 +38,7 @@ const Button = ({
         };
 
         handleColor();
-    }, [BACKGROUND_COLOR, COLOR, HOVER_COLOR]);
+    }, [BACKGROUND_COLOR, COLOR, HOVER_COLOR, bc]);
 
     return (
         <MyButton

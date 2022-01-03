@@ -67,17 +67,18 @@ export default MusicCarouselle;
 
 const Container = styled.div`
     text-align: center;
-    background-color: var(--color-2);
+    background-color: var(--color-light);
     height: auto;
     padding-bottom: 2em;
+    padding-top: 1em ;
 `;
 
 const SliderContainer = styled.div`
-    background-color: var(--color-2);
+    background-color: var(--color-light);
     height: auto;
     width: 100%;
 `;
 
 const Title = styled.h1`
-    color: white;
+    color: var(--color-dark);
 `;

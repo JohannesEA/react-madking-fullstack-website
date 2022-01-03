@@ -62,7 +62,7 @@ const Product = ({ item }) => {
                 preload="metadata"
             ></audio>
             <ProductInformationContainer>
-                <Title color="black">{product.title}</Title>
+                <Title color="white">{product.title}</Title>
                 <Desctiption>{product.description}</Desctiption>
                 <Price>Pris: {product.price} KR</Price>
                 <Buttons>
@@ -76,13 +76,13 @@ const Product = ({ item }) => {
                     </Button>
                     {!isPlaying ? (
                         <AiOutlinePlayCircle
-                            color="black"
+                            color="white"
                             fontSize={50}
                             onClick={() => handlePlayPauseSong()}
                         />
                     ) : (
                         <AiOutlinePauseCircle
-                            color="black"
+                            color="white"
                             fontSize={50}
                             onClick={() => handlePlayPauseSong()}
                         />
@@ -145,7 +145,7 @@ const animationTwo = keyframes`
 
 const Container = styled.div`
     display: flex;
-    background-color: white;
+    background-color: var(--color-dark);
     align-items: center;
     justify-content: center;
     flex-direction: row;
@@ -198,13 +198,13 @@ const ProductInformationContainer = styled.div`
 
 const Desctiption = styled.p`
     font-size: 1.2rem;
-    color: black;
+    color: var(--color-light);
 `;
 
 const Price = styled.p`
     font-size: 1.2rem;
     font-weight: 800;
-    color: black;
+    color: var(--color-light);
 `;
 
 const ConfirmationMessage = styled.p`

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { validateRequestMessage } from "../../reusableFunctions/Validations";
 import Button from "../../components/Button";
+import LoadingAnimation from "../../components/LoadingAnimation";
 const Contact = () => {
     //Validation message states
     const [messageState, setMessageState] = useState({
@@ -12,6 +13,8 @@ const Contact = () => {
         confirm: "",
         error: false,
     });
+    const [isLoading, setIsLoading] = useState("");
+
 
     //Request message state => the userrequest that will get validated and sent to our mailbox
     const [requestMessage, setRequestMessage] = useState({
@@ -41,6 +44,7 @@ const Contact = () => {
             )
         ) {
             console.log("Object to send: ", requestMessage);
+            setIsLoading(true);
             setMessageState({
                 ...messageState,
                 confirm:
@@ -48,6 +52,7 @@ const Contact = () => {
                 error: false,
             });
         } else {
+            setIsLoading(false);
             setMessageState({
                 email: "",
                 phonenumber: "",
@@ -98,10 +103,11 @@ const Contact = () => {
                 <ErrorMessage>{messageState.message}</ErrorMessage>
 
                 <Button
-                        text="Send"
-                        bc="color-2"
-                        btnOnClick={(e) => handleSendRequest(e)}
-                    ></Button>
+                    text="Send"
+                    bc="color-2"
+                    btnOnClick={(e) => handleSendRequest(e)}
+                ></Button>
+                {isLoading && <LoadingAnimation />}
                 {!messageState.error && (
                     <ConfirmationMessage>
                         {messageState.confirm}
@@ -118,7 +124,7 @@ const Contact = () => {
 export default Contact;
 
 const Container = styled.div`
-    padding: 1em;
+    padding: 1em 1em 3em 1em;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -128,7 +134,7 @@ const Container = styled.div`
     right: 0;
     width: 100%;
     height: auto;
-    background-color: var(--color-1);
+    background-color: var(--color-dark);
     @media (max-width: 800px) {
         flex-direction: column;
         height: auto;
@@ -180,10 +186,8 @@ const TextArea = styled.textarea`
     max-width: 100%;
     font-size: 1.2rem;
     min-height: 10em;
-    font-family: 'Montserrat';
-
+    font-family: "Montserrat";
 `;
-
 
 const ErrorMessage = styled.p`
     font-size: 1.2rem;

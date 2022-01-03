@@ -20,7 +20,6 @@ import { getContent } from "./redux/apiCalls";
 
 const App = () => {
     const user = useSelector((state) => state.user.currentUser);
-    console.log(user);
     const content = useSelector((state) => state.content.contents);
     const dispatch = useDispatch();
 
@@ -41,10 +40,23 @@ const App = () => {
                         path="/login"
                         element={user ? <Navigate to="/" /> : <Loginpage />}
                     />
-                    <Route path="/admin" element={<Adminpage />} />
+                    {/*Protected route*/}
+                    <Route
+                        path="/admin"
+                        element={
+                            user ? <Adminpage /> : <Navigate to="/login" />
+                        }
+                    />
+                    {/*Protected route*/}
                     <Route
                         path="/producthandler"
-                        element={<AdminProductpage />}
+                        element={
+                            user ? (
+                                <AdminProductpage />
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
                     />
                 </Routes>
             ) : (

@@ -16,7 +16,7 @@ const Container = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-1);
+    background-color: var(--color-dark);
 `;
 
 const Title = styled.h1`

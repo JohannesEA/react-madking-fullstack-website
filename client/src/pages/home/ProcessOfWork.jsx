@@ -49,7 +49,7 @@ useEffect(() => {
                     {width > 1000 ? (
                         <>
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="1"
                                 onClick={handleFirstStepContent}
                             >
@@ -57,7 +57,7 @@ useEffect(() => {
                             </Circle>{" "}
                             ____________________{" "}
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="2"
                                 onClick={handleSecondStepContent}
                             >
@@ -65,7 +65,7 @@ useEffect(() => {
                             </Circle>{" "}
                             ____________________{" "}
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="3"
                                 onClick={handleThirdStepContent}
                             >
@@ -73,7 +73,7 @@ useEffect(() => {
                             </Circle>{" "}
                             ____________________{" "}
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="4"
                                 onClick={handleFourthStepContent}
                             >
@@ -83,7 +83,7 @@ useEffect(() => {
                     ) : (
                         <>
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="1"
                                 onClick={handleFirstStepContent}
                             >
@@ -91,7 +91,7 @@ useEffect(() => {
                             </Circle>
                             _____
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="2"
                                 onClick={handleSecondStepContent}
                             >
@@ -99,7 +99,7 @@ useEffect(() => {
                             </Circle>
                             _____
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="3"
                                 onClick={handleThirdStepContent}
                             >
@@ -107,7 +107,7 @@ useEffect(() => {
                             </Circle>
                             _____
                             <Circle
-                                hover="#558ba0"
+                                hover="#ffffff"
                                 value="4"
                                 onClick={handleFourthStepContent}
                             >
@@ -156,25 +156,12 @@ const Container = styled.div`
     right: 0;
     width: 100%;
     height: 80vh;
-    background-color: var(--color-1);
+    background-color: var(--color-dark);
     @media (max-width: 800px) {
         flex-direction: column;
         height: auto;
     }
 `;
-
-// const CircleTextContainer = styled.div`
-// display: flex;
-// align-items: center;
-// justify-content: space-between;
-// flex-direction: row;
-// background-color: #464646;
-// `;
-
-// const CircleText = styled.p`
-// font-size: 1.2rem;
-// color: ${props => props.color};
-// `;
 
 const Top = styled.div`
     flex: 1;
@@ -221,7 +208,7 @@ const Circle = styled.h1`
     width: 2em;
     color: black;
     border-radius: 100%;
-    background-color: var(--color-5);
+    background-color: var(--color-light);
     padding: 0.5em;
     &:hover {
         border-radius: 0.5em;

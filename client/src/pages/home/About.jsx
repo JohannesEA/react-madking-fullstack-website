@@ -22,9 +22,6 @@ const About = () => {
         getContent(dispatch);
     }, [dispatch]);
 
-    console.log("Contents: ", contents);
-
-
     return (
         <Container id="about" >
             <Left>
@@ -62,11 +59,8 @@ const About = () => {
                 />
                 {width < 800 && (
                     <TextAndButtonContainer>
-                        <Text>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Accusamus temporibus totam a eum voluptates
-                            molestias sint asperiores pariatur ex tenetur!
-                        </Text>{" "}
+                                          {contents.map(text => (<Text key={text._id + "mdksddmk"}>{text.aboutdesc}</Text>))}
+
                         <Link
                             to="contact"
                             className="nav-logo"
@@ -103,7 +97,7 @@ const Container = styled.div`
     right: 0;
     width: 100%;
     height: 80vh;
-    background-color: var(--color-2);
+    background-color: var(--color-light);
     @media (max-width: 800px) {
         flex-direction: column;
         height: auto;
@@ -119,7 +113,7 @@ const TextAndButtonContainer = styled.div`
 
 
 const Title = styled.h1`
-    color: var(--color-text);
+    color: var(--color-dark);
     font-size: 2rem;
     font-weight: 800;
 `;
@@ -134,7 +128,7 @@ const Left = styled.div`
 `;
 
 const Text = styled.p`
-    color: var(--color-text);
+    color: var(--color-dark);
     font-weight: 400;
     font-size: 1.3rem;
     padding: 3rem 0;
